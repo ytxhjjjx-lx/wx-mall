@@ -1,0 +1,97 @@
+<!--pages/cart/cart.wxml-->
+<view class='container'>
+  <header-gray headerTitle="购物车" back="false"></header-gray>
+  <view class='main_content'>
+    <!--地址信息  -->
+    <view class='table receive'>
+      <view class='more'>修改
+        <text decode='true'>&gt;</text>
+      </view>
+      <view class='tr'>
+        <view class='th'>
+          <!-- 两个英文字符等于一个中文字的宽度 -->
+          收
+          <text class="text-hidden">a</text>货
+          <text class="text-hidden">a</text>人
+        </view>
+        <view class='td'>
+          李响 先生
+        </view>
+      </view>
+      <view class='tr'>
+        <view class='th'>
+          电
+          <text class="text-hidden">中</text>
+          <text class="text-hidden">中</text>话
+        </view>
+        <view class='td'>
+          15779289473
+        </view>
+      </view>
+      <view class='tr'>
+        <view class='th'>收货地址</view>
+        <view class='td'>七星创意工厂</view>
+      </view>
+    </view>
+    <!-- 购物车信息 -->
+    <view class='cart-groups-wraper'>
+      <view class="cart-group">
+        <!-- 凑单专区 -->
+        <view class="group-name">
+          <text>闪送超市</text>
+          <var class="red_font">凑单专区</var>
+        </view>
+        <view class="group-proptext">¥0起送，22:00前满¥30免运费，22:00后满¥50免运费</view>
+        <!-- 收货时间 -->
+        <view class='group-receive more'>
+          收货时间
+          <text decode='true'>&nbsp;&nbsp;</text>
+          <text class='time red_font'>{{receive_time}}</text>
+          <view class="group-receive-select" hidden='{{showSelect}}'>
+            <view wx:for="{{receive_time_list}}" wx:key="{{item}}" data-time="{{item}}" bindtap='chooseTime' class="{{receive_time===item ? 'active' : ''}}">{{item}}</view>
+          </view>
+          <text class="group-receive-ext" bindtap='choose_time'>可预订<text decode='true'>&gt;</text></text>
+        </view>
+        <!-- 收货备注 -->
+        <view class="group-comment">
+          <text class="group-comment-txt">收货备注<text decode='true'>&nbsp;&nbsp;</text></text>
+          <view class="group-comment-input-wrap">
+            <input type="text" placeholder="可输入100字以内特殊要求内容" maxlength="100" class="group-comment-input" bindfocus="focusInput" bindblur="blurInput" />
+          </view>
+        </view>
+        <!-- 商品列表 -->
+        <view>
+          <navigator class="pro_item" wx:for="{{carts}}" wx:key="{{item.id}}" url="/packageA/pages/product-item/product-item?id={{item.id}}">
+            <view class="{{item.checked ? 'active' : ''}}" catchtap="changeChecked" data-id="{{item.id}}">
+              <text decode='true'>&nbsp; </text>
+            </view>
+            <view class="group-item-img">
+              <image src="{{item.product_img}}"></image>
+            </view>
+            <view class="group-item-detail">
+              <view class="name">{{item.product_name}}</view>
+              <view class="product-specifics-wrap">
+                <view class="product-specifics">
+                  <text>￥{{item.product_price}}</text>
+                </view>
+                <view class="product-operates">
+                  <text class="inner" catchtap="subProduct"> - </text>
+                  <text class="product-operates-item">{{item.num}}</text>
+                  <text class="inner" catchtap="addProduct"> + </text>
+                </view>
+              </view>
+            </view>
+          </navigator>
+        </view>
+        <!-- 底部全选 -->
+        <view class="group-footer">
+          <text class="{{checkedAll ? 'selectAll-true': 'selectAll-false'}}" bindtap="changeCheckedAll">全选</text>
+          共：
+          <text class="redfont">￥<text class='red_font'>{{totalPrice}}</text></text>
+          <text class="group-btn" wx:if="{{checkedAll}}">选好了</text>
+					<text class="group-btn group-btn1" wx:else>满￥0起送</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

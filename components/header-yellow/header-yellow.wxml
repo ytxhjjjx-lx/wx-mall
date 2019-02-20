@@ -1,0 +1,7 @@
+<!--components/header-yellow/header-yellow.wxml-->
+<view class='header'>
+  <view class="header-content">
+    <text class='address'>人民公园 12</text>
+  </view>
+  <text class="search">搜索</text>
+</view>

@@ -1,13 +1,43 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+  <header-yellow></header-yellow>
+  <view class='main_content'>
+		<!-- 轮播图 -->
+		<swiper class='slideshow' indicator-dots autoplay interval="2000"
+		circular>
+			<swiper-item wx:for="{{banner}}" wx:key="{{item.id}}">
+				<image src="{{item.bannar_img}}" class="slide-image"/>
+			</swiper-item>
+		</swiper>
+		<!-- 商品列表 -->
+		<view class='product_wrap'>
+			<view class='products' wx:for="{{categories}}" wx:key="{{item.id}}"
+			wx:if="{{index < 5}}">
+				<!-- 分类标题 -->
+				<view class="category_item_title">
+					<text>{{item.name}}</text>
+					<navigator open-type="switchTab" url='/pages/category/category'>更多<text decode>&gt;</text></navigator>
+				</view>
+				<image class='category-item-banner' src='{{item.category_img}}'></image>
+				<!-- 分类商品列表 -->
+				<view class="category_item_goodsList">
+					<navigator wx:for="{{item.products}}" wx:for-item="pro" wx:for-index="ind" wx:key="{{pro.id}}" wx:if="{{ind < 3}}" url="/packageA/pages/product-item/product-item?id={{pro.id}}">
+						<!-- 商品图片 -->	
+						<view class='pro_img'>
+							<image src='{{pro.imgs.min}}'></image>
+						</view>				
+						<!-- 商品细节 -->
+						<view class="product-name no_wrap">{{pro.name}}</view>
+						<view class="product-specifics">
+							<view class="product-specifics-left">
+								<view>{{pro.unit}}ml</view>
+								<view>￥{{pro.price}}</view>
+							</view>
+							<view class="product-specifics-right">+</view>
+						</view>
+					</navigator>
+				</view>
+			</view>
+		</view>
+	</view>
 </view>

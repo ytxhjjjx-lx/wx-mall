@@ -1,0 +1,73 @@
+<!--pages/category/category.wxml-->
+<view class="container">
+  <header-yellow></header-yellow>
+  <view class='main_content'>
+    <!-- 分类 -->
+    <view class="categories">
+      <view class="categories_wrap">
+				<!-- 通过data-传参 -->
+        <view wx:for="{{categories}}" wx:key="{{item.id}}" data-id="{{item.id}}" bindtap="changeActiveCate" class='categories_item'>
+          <text class="{{activeCateId===item.id ? 'active' : ''}}">{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+		<!-- 商品 -->
+		<view class='products'>
+			<!-- 筛选内容 -->
+			<view class='filter' bindtap='hideFilterItems'>
+				<!-- 筛选按钮 -->
+				<view class="filterTab">
+					<view>
+						<text>{{ChildCateKey}}</text>
+						<!-- 阻止事件冒泡 -->
+						<image src="../../images/icon-down.png" alt="" catchtap="chooseCategory" class="{{click ? 'rotate1' : ''}}"></image>
+					</view>
+					<view>
+						<text>{{rankKey}} </text>
+						<!-- 阻止事件冒泡 -->
+						<image src="../../images/icon-down.png" alt="" catchtap="chooseRanking" class="{{click1 ? 'rotate1' : ''}}"></image>
+					</view>
+				</view>
+				<!-- 全部分类 -->
+				<view class="allCategory" hidden="{{!click}}">
+					<view class='allCategory_wrap'>
+						<view class="{{activeChildCateIndex===0 ? 'active': ''}}" bindtap='changeActiveChildcate' data-index="{{0}}">全部分类</view>
+						<view wx:for="{{activeChildCates}}" wx:key="{{index}}" class="{{activeChildCateIndex===index+1 ? 'active' : ''}}" bindtap='changeActiveChildcate' data-index="{{index+1}}">
+							{{item.name}}
+						</view>
+					</view>
+				</view>
+				<!-- 综合排序 -->
+				<view class="ranking" hidden="{{!click1}}">
+					<view class='ranking_wrap'>
+						<view wx:for="{{rankingKeys}}" wx:key="{{index}}"
+class="{{item===rankKey ? 'active' : ''}}" data-name="{{item}}" bindtap="changeRanking"> {{item}}</view>
+					</view>
+				</view>
+			</view>
+			<!-- 产品列表 -->
+			<view class='productItems'>
+				<navigator class='productItem flex_row' wx:for="{{activeProducts}}" wx:key="{{item.id}}" url="/packageA/pages/product-item/product-item?id={{item.id}}">
+					<view class="ProductImg">
+						<image src='{{item.imgs.min}}'></image>
+					</view>
+					<!-- 商品详情 -->
+					<view class="ProductDetails ">
+						<view class="product_name">{{item.name}}</view>
+						<view class="proDetails_bottom flex_row">
+							<view class="left flex_column">
+								<text class="capacity">{{item.unit}}ml</text>
+								<view class="price ">￥{{item.price}}</view>
+							</view>
+							<view class="right flex_row">
+								<text> - </text>
+								<text class="num">{{item.num}}</text>
+								<text> + </text>
+							</view>
+						</view>
+					</view>
+				</navigator>
+			</view>
+		</view>
+  </view>
+</view>

@@ -1,0 +1,71 @@
+<!--pages/mine/mine.wxml-->
+<view class="mine">
+  <view class="userinfo">
+    <view class="user">
+      <view class="user-phone">15779284973</view>
+      <view class="user-level">V0</view>
+    </view>
+  </view>
+  <view class="favorite">
+    <navigator url="" class="goodFavorite item">
+      <text class="inner">商品收藏</text>
+    </navigator>
+    <view class="split"></view>
+    <view class="shopFavorite item">
+      <text class="inner">店铺收藏</text>
+    </view>
+  </view>
+  <!-- 订单主体 -->
+  <view class="mine-content">
+    <view class="mine-order">
+      <view class="more">
+				<text>我的订单</text>
+        <text class="more_order">
+          查看全部订单
+        </text>
+        
+      </view>
+      <view class="order-types">
+        <view class="order-type order-type-11">代付款</view>
+        <view class="order-type order-type-12">待收货</view>
+        <view class="order-type order-type-13">待评价</view>
+        <view class="order-type order-type-14">退款/售后</view>
+      </view>
+    </view>
+    <view class="block">
+      <view>
+        <view class="mine-item mine-item-1">
+          <image src="../../images/points_mall.png" alt=""></image>
+        </view>
+        <text>积分商城</text>
+      </view>
+      <view>
+        <view class="mine-item mine-item-2">
+          <image src="../../images/discount_coupon.png" alt=""></image>
+				</view>
+        <text>优惠券</text>
+      </view>
+      <view>
+        <view class="mine-item mine-item-3">
+          <image src="../../images/address_list.png" alt=""></image>
+        </view>
+        <text>收货地址</text>
+      </view>
+      <view>
+        <view class="mine-item mine-item-4">
+          <image src="../../images/customer_feedback.png" alt=""></image>
+        </view>
+        <text>客服/反馈</text>
+      </view>
+      <view>
+        <view class="mine-item mine-item-5">
+          <image src="../../images/about_us.png" alt=""></image>
+        </view>
+        <text>关于我们</text>
+      </view>
+    </view>
+    <view class="unlogin" bindtap="logout">
+      退出当前账号
+    </view>
+  </view>
+</view>

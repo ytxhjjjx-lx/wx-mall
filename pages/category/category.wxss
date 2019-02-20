@@ -1,0 +1,253 @@
+/* pages/category/category.wxss */
+
+/* 产品分类 */
+
+.categories {
+  width: 24%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #f8f8f8;
+}
+
+.categories .categories_wrap {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.categories .categories_wrap .categories_item {
+  width: 100%;
+  height: 70rpx;
+  color: #6d6d6d;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6rpx 0;
+}
+
+.categories .categories_wrap .categories_item text {
+  font-size: 26rpx;
+  display: block;
+  height: 58rpx;
+  line-height: 58rpx;
+  text-align: center;
+  width: 100%;
+  padding-left: 8rpx;
+}
+
+.categories .categories_wrap .categories_item text.active {
+  border-left: 8rpx solid #f0d001;
+  padding-left: 0;
+}
+
+/* 商品列表 */
+
+.products {
+  width: 75%;
+  position: absolute;
+  left: 25%;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.products .filter {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.products .filter .filterTab {
+  height: 80rpx;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  background: rgba(255, 255, 255, 0.6);
+  border-bottom: 1px solid #e0e0e0;
+  z-index: 2;
+}
+
+.products .filter .filterTab > view {
+  width: 49%;
+  height: 100%;
+  float: left;
+  margin-bottom: 0;
+  text-align: center;
+  font-size: 26rpx;
+  color: #777;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.products .filter .filterTab > view:first-child {
+  border-right: 1px solid #ccc;
+}
+
+.products .filter .filterTab > view image {
+  margin-left: 10rpx;
+  width: 26rpx;
+  height: 13rpx;
+  transform: rotateZ(0deg);
+  transition: all 1s ease;
+}
+
+.products .filter .filterTab > view image.rotate1 {
+  /* 点击箭头过渡效果 */
+  transform: rotateZ(-180deg);
+}
+
+.allCategory {
+  position: absolute;
+  top: 80rpx;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.allCategory > .allCategory_wrap {
+  overflow: hidden;
+  padding-bottom: 20rpx;
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.allCategory > .allCategory_wrap view {
+  padding: 12rpx 16rpx;
+  border: 1px solid #e0e0e0;
+  border-radius: 8rpx;
+  float: left;
+  color: #777;
+  font-size: 24rpx;
+  margin: 12rpx 0 0 12rpx;
+}
+
+.allCategory > .allCategory_wrap view.active {
+  background-color: #fff9d9;
+  border-color: #e6d056;
+}
+
+.ranking {
+  position: absolute;
+  top: 80rpx;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.ranking > .ranking_wrap {
+  overflow: hidden;
+  padding-bottom: 20rpx;
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.ranking > .ranking_wrap view {
+  padding: 12rpx 16rpx;
+  border: 1px solid #e0e0e0;
+  border-radius: 8rpx;
+  float: left;
+  color: #777;
+  font-size: 24rpx;
+  margin: 12rpx 0 0 12rpx;
+}
+
+.ranking > .ranking_wrap view.active {
+  background-color: #fff9d9;
+  border-color: #e6d056;
+}
+
+/* 商品 */
+.productItems {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 80rpx;
+	bottom: 0;
+	overflow-x: hidden;
+	overflow-y: auto;
+	background-color: #fff;
+}
+.productItems .productItem {
+	width: 100%;
+	height: 23%;
+	border-bottom: 1px solid #e0e0e0;
+}
+.productItems .productItem:last-of-type {
+	border-bottom: none;
+}
+.productItems .productItem .ProductImg {
+	width: 40%;
+	height: 100%;
+}
+.productItems .productItem .ProductImg image {
+	width: 80%;
+	height: 80%;
+	margin: 10%;
+}
+.productItems .productItem .ProductDetails {
+	width: 60%;
+	height: 100%;
+	display: flex;
+	flex-flow: column wrap;
+	justify-content: space-around;
+}
+.productItems .productItem .ProductDetails .product_name {
+	text-align: left;
+	font-size: 26rpx;
+	color: #232b33;
+}
+.productItem .ProductDetails .proDetails_bottom {
+	height: 40%;
+	justify-content: space-between;
+	font-size: 22rpx;
+}
+.productItem .ProductDetails .proDetails_bottom > .left {
+	justify-content: space-between;
+	font-size: 24rpx;
+}
+.productItem .ProductDetails .proDetails_bottom > .left view {
+	color: #ff3800;
+	margin-bottom: 10rpx;
+}
+.productItem .ProductDetails .proDetails_bottom > .left view {
+	text-align: left;
+	color: #999;
+}   
+.productItem .ProductDetails .proDetails_bottom > .right {
+	margin-right: 15%;
+	justify-content: space-around;
+	align-items: center;
+}
+.ProductDetails .proDetails_bottom > .right text {
+	color: #ff3800;
+	display: block;
+	width: 44rpx;
+	height: 44rpx;
+	line-height: 40rpx;
+	text-align: center;
+	border: 2rpx solid #f40;
+	border-radius: 50%;
+	font-size: 32rpx;
+	font-weight: bold;
+}
+.ProductDetails .proDetails_bottom > .right text.num {
+	border: none;
+	width: 40rpx;
+	height: 30rpx;
+	line-height: 30rpx;
+	font-size: 20rpx;
+	font-weight: normal;
+}
+
+
+
+
