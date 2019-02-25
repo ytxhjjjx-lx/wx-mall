@@ -60,9 +60,11 @@ class="{{item===rankKey ? 'active' : ''}}" data-name="{{item}}" bindtap="changeR
 								<view class="price ">￥{{item.price}}</view>
 							</view>
 							<view class="right flex_row">
-								<text> - </text>
-								<text class="num">{{item.num}}</text>
-								<text> + </text>
+							  <!-- 有数量时显示 -->
+								<text data-pro="{{item}}" catchtap='subCart'
+								hidden="{{item.num == 0}}"> - </text>
+								<text class="num" hidden="{{item.num == 0}}">{{item.num}}</text>
+								<text data-pro="{{item}}" catchtap='addCart'> + </text>
 							</view>
 						</view>
 					</view>

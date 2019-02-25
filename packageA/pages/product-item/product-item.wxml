@@ -1,2 +1,41 @@
 <!--packageA/pages/product-item/product-item.wxml-->
-<text>packageA/pages/product-item/product-item.wxml</text>
+<view  class="container">
+    <view class="main_content">
+        <view class="block">
+            <view class="block-img">
+                <image src="{{productInfo.imgs.min}}"></image>
+            </view>
+            <view class="block-price">
+              <text>{{productInfo.name}}</text>
+              <text>￥{{productInfo.price}}</text>
+            </view>
+        </view> 
+         <!-- 商品详情 -->
+      <view class="block-detail">
+        <view class="detail-div">商品详情</view>
+        <view class="detail-p"><text decode>品&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;牌               </text ><text class="detail-span">{{productInfo.brand}}</text></view>
+        <view  class="detail-p">产品规格<text class="detail-span">{{productInfo.unit}}</text></view>
+      </view>
+      <view class="axf-img">
+        <image src="../../../images/productDetailDefault.jpg"></image>
+      </view>
+      <!-- 底部 -->
+      <view  class="footer">
+        <view  class="collect">
+          <text class="collect-span">收藏</text>
+          <view class="collect-add">
+            添加商品：
+            <view  class="btn-wrap">
+              <text catchtap='subCart'>-</text>
+               <text>{{productInfo.num}}</text>
+              <text catchtap='addCart'>+</text>
+            </view>
+          </view>
+        </view>
+        <navigator open-type='switchTab' url='/pages/cart/cart' class='append'>
+          <view class="append-img"></view>
+          <text hidden='{{productInfo.num == 0}}'>{{productInfo.num}}</text>
+        </navigator>
+      </view>
+    </view>
+</view>

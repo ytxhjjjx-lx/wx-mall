@@ -1,3 +1,4 @@
+//格式化时间
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -14,6 +15,13 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+//验证手机号
+const checkPhone = phone => {
+	let reg = /^1[3|4|5|7|8|9][0-9]{9}$/;
+	return reg.test(phone);
+}
+
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+	checkPhone: checkPhone
 }

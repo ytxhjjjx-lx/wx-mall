@@ -31,19 +31,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
-		//提取整理后的分类数据
-		let categories = app.globalData.computedCategories
-		this.setData({
-			categories: categories
-		})
-		console.log(categories)
-		//初始化子分类
-		let ChildCates = this.data.categories[this.data.activeCateId - 1].cids;
-		this.setData({
-			activeChildCates: ChildCates
-		})
-		//初始化商品列表
-		this.changeActiveProducts()
+		let computedCategories = app.globalData.computedCategories
+		if (computedCategories.length > 0) {
+			this.setData({
+				categories: computedCategories
+			})
+			this.initData()
+		} else {
+			app.getComputedCategories(computedCategories => {
+				this.setData({
+					categories: computedCategories
+				})
+				this.initData()
+			})
+		}
   },
 
   /**
@@ -57,7 +58,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+		app.getComputedCategories(computedCategories => {
+			this.setData({
+				categories: computedCategories
+			})
+			this.initData()
+		})
   },
 
   /**
@@ -73,6 +79,35 @@ Page({
   onUnload: function () {
 
   },
+
+	//提取整理后的分类数据
+	getComputedCategories () {
+		let computedCategories = app.globalData.computedCategories
+		if (computedCategories.length > 0) {
+			this.setData({
+				categories: computedCategories
+			})
+			this.initData()
+		} else {
+			app.getComputedCategories(computedCategories => {
+				this.setData({
+					categories: computedCategories
+				})
+				this.initData()
+			})
+		}
+	},
+
+	//初始化
+	initData () {
+		//初始化子分类
+		let ChildCates = this.data.categories[this.data.activeCateId - 1].cids;
+		this.setData({
+			activeChildCates: ChildCates
+		})
+		//初始化商品列表
+		this.changeActiveProducts()
+	},
 
 	changeActiveCate(event) {
 		// 获取点击分类的id
@@ -170,5 +205,53 @@ Page({
 		this.setData({
 			activeProducts: products
 		})
+	},
+
+	addCart (e) {
+		let pro = e.currentTarget.dataset.pro
+		let userinfo = app.globalData.userinfo
+		if (!(userinfo.id)) {
+			wx.showModal({
+				title: '提示',
+				content: '你还未登录!',
+				success(res) {
+					if (res.confirm) {
+						//确定
+						wx.redirectTo({
+							url: '/pages/login/login'
+						})
+					}
+				}
+			})
+		} else {
+			pro.product_id = pro.id
+			app.addCart(pro).then(computedCategories => {
+				// 添加到购物车后更新本地商品的num属性
+				this.setData({
+					categories: computedCategories
+				})
+				this.changeActiveProducts()
+			})
+		}
+	},
+	subCart (e) {
+		let pro = e.currentTarget.dataset.pro
+		if (pro.num > 0) {
+			//追加product_id属性，方便同步数据时判断（购物车商品数据已有该属性）
+			pro.product_id = pro.id
+			app.subCart(pro).then(res => {
+					let computedCategories = app.globalData.computedCategories
+					this.setData({
+						categories: computedCategories
+					})
+					this.changeActiveProducts()
+				})
+		} else {
+			wx.showToast({
+				title: '请先添加商品',
+				duration: 800,
+				mask: true
+			})
+		}
 	}
 })

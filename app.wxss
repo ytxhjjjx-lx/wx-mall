@@ -6,6 +6,12 @@ page {
 
 /* 多个页面公用样式 */
 
+page::-webkit-scrollbar, view::-webkit-scrollbar{
+	/*滚动条整体样式*/
+  width: 0px;     
+  height: 0px;
+}
+
 .container {
   width: 100%;
   height: 100%;
@@ -38,6 +44,35 @@ page {
   color: #ffd600;
 }
 
+.red_font {
+	color: #e64f1a;
+}
+
+.theme-bg{
+  background-color: #ffd600;
+}
+.white-bg{
+  background-color: #fff;
+}
+
+.spline-top{
+  border-top: 1px solid #e0e0e0;
+}
+.spline-bottom{
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.theme-btn{
+  border-radius: 10rpx;
+  background: #ffd600;
+  color: #000;
+  text-align: center;
+  margin: 40rpx 12rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+	font-size: 32rpx;
+}
+
 /* 弹性布局 */
 
 .flex_row {
@@ -50,6 +85,3 @@ page {
   flex-flow: column nowrap;
 }
 
-.red_font {
-	color: #e64f1a;
-}

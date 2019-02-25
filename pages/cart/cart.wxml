@@ -1,5 +1,37 @@
 <!--pages/cart/cart.wxml-->
-<view class='container'>
+<wxs module="cart_module">
+var total = function (arr) {
+  var result = 0
+  var arr = arr
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i].checked) {
+      result += (arr[i].num * arr[i].product_price)
+    }
+  }
+  return result.toFixed(1)
+}
+
+/*
+ * 是否有勾选的商品（都未勾选显示‘满0元起送’）
+ */
+var isCheckBol = function(arr) {
+	var checkBol = false
+	for (var i = 0; i < arr.length; i++) {
+    if (arr[i].checked) {
+      checkBol = true
+    }
+  }
+	return checkBol
+}
+
+module.exports = {
+	isCheckBol: isCheckBol,
+  totalPrice: total
+}
+</wxs>
+
+
+<view class='container' hidden='{{carts.length == 0}}'>
   <header-gray headerTitle="购物车" back="false"></header-gray>
   <view class='main_content'>
     <!--地址信息  -->
@@ -61,7 +93,7 @@
         </view>
         <!-- 商品列表 -->
         <view>
-          <navigator class="pro_item" wx:for="{{carts}}" wx:key="{{item.id}}" url="/packageA/pages/product-item/product-item?id={{item.id}}">
+          <navigator class="pro_item" wx:for="{{carts}}" wx:key="{{item.id}}" url="/packageA/pages/product-item/product-item?id={{item.product_id}}">
             <view class="{{item.checked ? 'active' : ''}}" catchtap="changeChecked" data-id="{{item.id}}">
               <text decode='true'>&nbsp; </text>
             </view>
@@ -75,9 +107,11 @@
                   <text>￥{{item.product_price}}</text>
                 </view>
                 <view class="product-operates">
-                  <text class="inner" catchtap="subProduct"> - </text>
+                  <text class="inner" catchtap="subProduct"
+									data-pro="{{item}}"> - </text>
                   <text class="product-operates-item">{{item.num}}</text>
-                  <text class="inner" catchtap="addProduct"> + </text>
+                  <text class="inner" catchtap="addProduct"
+									data-pro="{{item}}"> + </text>
                 </view>
               </view>
             </view>
@@ -87,8 +121,8 @@
         <view class="group-footer">
           <text class="{{checkedAll ? 'selectAll-true': 'selectAll-false'}}" bindtap="changeCheckedAll">全选</text>
           共：
-          <text class="redfont">￥<text class='red_font'>{{totalPrice}}</text></text>
-          <text class="group-btn" wx:if="{{checkedAll}}">选好了</text>
+          <text class="redfont">￥<text class='red_font'>{{cart_module.totalPrice(carts)}}</text></text>
+					<text class="group-btn" wx:if='{{cart_module.isCheckBol(carts) || checkedAll}}'>选好了</text>
 					<text class="group-btn group-btn1" wx:else>满￥0起送</text>
         </view>
       </view>

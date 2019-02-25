@@ -1,18 +1,20 @@
 // pages/mine/mine.js
+const app = getApp()
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+		phone: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+		this.checkLoginState()
   },
 
   /**
@@ -26,7 +28,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+		this.checkLoginState()
   },
 
   /**
@@ -51,6 +53,41 @@ Page({
   },
 
 	logout() {
-		
+		wx.removeStorage({
+			key: 'userinfo',
+			success(res) {
+				wx.redirectTo({
+					url: '/pages/login/login'
+				})
+			}
+		})
+	},
+
+	//判断登录状态
+	checkLoginState() {
+		let userinfo = app.globalData.userinfo
+		if (!(userinfo.id)) {
+			wx.showModal({
+				title: '提示',
+				content: '你还未登录!',
+				success(res) {
+					if (res.confirm) {
+						//确定
+						wx.redirectTo({
+							url: '/pages/login/login'
+						})
+					} else if (res.cancel) {
+						//取消, 回到首页
+						wx.switchTab({
+							url: '/pages/index/index'
+						})
+					}
+				}
+			})
+		} else {
+			this.setData({
+				phone: userinfo.phone
+			})
+		}
 	}
 })

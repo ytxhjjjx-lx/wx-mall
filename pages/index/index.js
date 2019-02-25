@@ -14,11 +14,19 @@ Page({
   bindViewTap: function () {
   },
   onLoad: function () {
-    //提取整理后的分类数据
-    let categories = app.globalData.computedCategories
-    this.setData({
-      categories: categories
-    })
+    //提取商品数据（已登录拿到同步后的数据）
+		let computedCategories = app.globalData.computedCategories
+		if (computedCategories.length > 0) {
+			this.setData({
+				categories: computedCategories
+			})
+		} else {
+			app.getComputedCategories(computedCategories => {
+				this.setData({
+					categories: computedCategories
+				})
+			})
+		} 
     // 获取轮播数据
     wx.request({
       url: api.host + '/bannar',
@@ -28,5 +36,43 @@ Page({
         })
       }
     })
-  }
+  },
+
+	onShow () {
+		//提取商品数据（已登录拿到同步后的数据）
+		app.getComputedCategories(computedCategories => {
+			this.setData({
+				categories: computedCategories
+			})
+		})
+	}, 
+
+
+	addCart (e) {
+		let pro = e.currentTarget.dataset.pro
+		let userinfo = app.globalData.userinfo
+		if (!(userinfo.id)) {
+			wx.showModal({
+				title: '提示',
+				content: '你还未登录!',
+				success(res) {
+					if (res.confirm) {
+						//确定
+						wx.redirectTo({
+							url: '/pages/login/login'
+						})
+					}
+				}
+			})
+		} else {
+			//追加product_id属性，方便同步数据时判断（购物车商品数据已有该属性）
+			pro.product_id = pro.id
+			app.addCart(pro).then(computedCategories => {
+				// 添加到购物车后更新本地商品的num属性
+				this.setData({
+					categories: computedCategories
+				})
+			})
+		}
+	}
 })

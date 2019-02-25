@@ -1,4 +1,8 @@
 // pages/cart/cart.js
+const app = getApp()
+// 引入api
+let api = require('../../utils/api.js')
+
 Page({
 
   /**
@@ -28,87 +32,7 @@ Page({
     ],
     //收货备注
     receive_remark: '',
-    carts: [{
-        "product_id": 109,
-        "userId": 1,
-        "product_img": "http://dummyimage.com/80x80/ef79f2&text=蒋娜",
-        "product_name": "通每场",
-        "product_price": 30.2,
-        "checked": true,
-        "num": 6,
-        "id": 2
-      },
-      {
-        "product_id": 70,
-        "userId": 1,
-        "product_img": "http://dummyimage.com/80x80/7998f2&text=傅军",
-        "product_name": "则北农界动",
-        "product_price": 40.3,
-        "checked": true,
-        "num": 4,
-        "id": 3
-      },
-      {
-        "product_id": 16,
-        "userId": 1,
-        "product_img": "http://dummyimage.com/80x80/f279d3&text=孔杰",
-        "product_name": "反就建被",
-        "product_price": 31.4,
-        "checked": true,
-        "num": 2,
-        "id": 4
-      },
-      {
-        "product_id": 29,
-        "userId": 1,
-        "product_img": "http://dummyimage.com/80x80/f279a1&text=常军",
-        "product_name": "相几因几始",
-        "product_price": 78.7,
-        "checked": true,
-        "num": 4,
-        "id": 5
-      },
-      {
-        "product_id": 34,
-        "userId": 1,
-        "product_img": "http://dummyimage.com/80x80/f2d379&text=黄明",
-        "product_name": "市何全是包统种团政",
-        "product_price": 35.9,
-        "checked": true,
-        "num": 3,
-        "id": 6
-      },
-      {
-        "product_id": 32,
-        "userId": 1,
-        "product_img": "http://dummyimage.com/80x80/7983f2&text=孔芳",
-        "product_name": "写建活把称斯对局料",
-        "product_price": 63.7,
-        "checked": true,
-        "num": 1,
-        "id": 7
-      },
-      {
-        "product_id": 55,
-        "userId": 1,
-        "product_img": "http://dummyimage.com/80x80/f2b579&text=夏霞",
-        "product_name": "越太值约广心县很",
-        "product_price": 26.1,
-        "checked": true,
-        "num": 1,
-        "id": 8
-      },
-      {
-        "product_id": 37,
-        "userId": 1,
-        "product_img": "http://dummyimage.com/80x80/f279f2&text=何芳",
-        "product_name": "满即查设张",
-        "product_price": 68.1,
-        "checked": true,
-        "num": 2,
-        "id": 9
-      },
-    ],
+    carts: [],
 		totalPrice: 0,
 		checkedAll: true
   },
@@ -117,15 +41,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function() {
-		let carts = this.data.carts;
-		let totalPrice = this.data.totalPrice;
-		for (let pro of carts) {
-			totalPrice += pro.product_price * pro.num;
-		}
-		this.setData({
-			totalPrice: totalPrice.toFixed(1),
-      receive_time: '30分钟送达',
-    })
+		this.checkLoginState()
   },
 
   /**
@@ -139,7 +55,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+		this.checkLoginState()
   },
 
   /**
@@ -198,6 +114,7 @@ Page({
       receive_remark: event.detail.value
     })
   },
+
 	//切换勾选状态
 	changeChecked (event) {
 		let id = event.target.dataset.id;
@@ -205,52 +122,114 @@ Page({
 		for (let pro of carts) {
 			if (id == pro.id) {
 				pro.checked = !pro.checked;
+				app.fetch(api.host + '/carts/' + id, 'put', {
+					product_id: pro.product_id,
+					userId: pro.userId,
+					product_img: pro.product_img,
+					product_name: pro.product_name,
+					product_price: pro.product_price,
+					checked: pro.checked,
+					num: pro.num
+				})
 			}
 		}
 		let checkAllBol = true;
-		let totalPrice = Number(this.data.totalPrice);
-		totalPrice = 0;
 		for (let i = 0; i < carts.length; i++) {
 			if (!carts[i].checked) {
 				checkAllBol = false;
-			} else {
-				totalPrice += (carts[i].product_price * carts[i].num);
 			}
 		}
-		totalPrice = totalPrice.toFixed(1);
 		//判断是否全部勾选
 		this.setData({
 			carts: carts,
-			checkedAll: checkAllBol,
-			totalPrice: totalPrice
+			checkedAll: checkAllBol
 		})
 	},
-	subProduct () {
 
+	subProduct (e) {
+		let pro = e.currentTarget.dataset.pro
+		app.subCart(pro)
+			.then(res => {
+				let carts = app.globalData.carts
+				this.setData({
+					carts: carts
+				})
+			})
 	},
-	addProduct () {
 
+	addProduct (e) {
+		let pro = e.currentTarget.dataset.pro
+		app.addCart(pro)
+			.then(res => {
+				let carts = app.globalData.carts
+				this.setData({
+					carts: carts
+				})
+			})
 	},
+
 	//全选
 	changeCheckedAll () {
 		let carts = this.data.carts;
 		let bol = this.data.checkedAll;
-		let totalPrice = Number(this.data.totalPrice);
 		bol = !bol;
-		totalPrice = 0;
 		for (let i=0; i<carts.length; i++) {
-			if (bol) {
-				totalPrice += (carts[i].product_price * carts[i].num);
-			} else {
-				totalPrice = 0;
-			}
 			carts[i].checked = bol;
+			app.fetch(api.host + '/carts/' + carts[i].id, 'put', {
+				product_id: carts[i].product_id,
+				userId: carts[i].userId,
+				product_img: carts[i].product_img,
+				product_name: carts[i].product_name,
+				product_price: carts[i].product_price,
+				checked: carts[i].checked,
+				num: carts[i].num
+			})
 		}
-		totalPrice = totalPrice.toFixed(1);
 		this.setData({
 			checkedAll: bol,
-			carts: carts,
-			totalPrice: totalPrice
+			carts: carts
 		})
+	},
+
+	//判断登录状态
+	checkLoginState () {
+		let userinfo = app.globalData.userinfo
+		if (!(userinfo.id)) {
+			wx.showModal({
+				title: '提示',
+				content: '你还未登录!',
+				success(res) {
+					if (res.confirm) {
+						//确定
+						wx.redirectTo({
+							url: '/pages/login/login'
+						})
+					} else if (res.cancel) {
+						//取消, 回到首页
+						wx.switchTab({
+							url: '/pages/index/index'
+						})
+					}
+				}
+			})
+		} else {
+			let carts = app.globalData.carts
+			let totalPrice = 0;
+			for (let pro of carts) {
+				totalPrice += pro.product_price * pro.num;
+			}
+			var checkAllBol = true
+			for (var i = 0; i < carts.length; i++) {
+				if (!carts[i].checked) {
+					checkAllBol = false
+				}
+			}
+			this.setData({
+				carts: carts,
+				totalPrice: totalPrice.toFixed(1),
+				receive_time: '30分钟送达',
+				checkedAll: checkAllBol
+			})
+		}
 	}
 })

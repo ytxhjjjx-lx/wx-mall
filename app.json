@@ -3,13 +3,15 @@
 		"pages/index/index",
 		"pages/category/category",
 		"pages/cart/cart",
-		"pages/mine/mine"
+		"pages/mine/mine",
+		"pages/login/login"
 	],
 	"subpackages": [
 		{
 			"root": "packageA",
 			"pages": [
-				"pages/product-item/product-item"
+				"pages/product-item/product-item",
+				"pages/site/site"
 			]
 		}
 	],
@@ -25,26 +27,26 @@
 			{
 				"pagePath": "pages/index/index",
 				"text": "首页",
-				"iconPath": "images/home.png",
-				"selectedIconPath": "images/home-active.png"
+				"iconPath": "images/tabBar/home.png",
+				"selectedIconPath": "images/tabBar/home-active.png"
 			},
 			{
 				"pagePath": "pages/category/category",
 				"text": "闪送超市",
-				"iconPath": "images/current.png",
-				"selectedIconPath": "images/current-active.png"
+				"iconPath": "images/tabBar/current.png",
+				"selectedIconPath": "images/tabBar/current-active.png"
 			},
 			{
 				"pagePath": "pages/cart/cart",
 				"text": "购物车",
-				"iconPath": "images/cart.png",
-				"selectedIconPath": "images/cart-active.png"
+				"iconPath": "images/tabBar/cart.png",
+				"selectedIconPath": "images/tabBar/cart-active.png"
 			},
 			{
 				"pagePath": "pages/mine/mine",
 				"text": "我的",
-				"iconPath": "images/mine.png",
-				"selectedIconPath": "images/mine-active.png"
+				"iconPath": "images/tabBar/mine.png",
+				"selectedIconPath": "images/tabBar/mine-active.png"
 			}
 		]
 	}

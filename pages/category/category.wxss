@@ -229,7 +229,7 @@
 }
 .ProductDetails .proDetails_bottom > .right text {
 	color: #ff3800;
-	display: block;
+	/* display: block; */
 	width: 44rpx;
 	height: 44rpx;
 	line-height: 40rpx;

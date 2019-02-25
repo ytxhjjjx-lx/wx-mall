@@ -1,8 +1,8 @@
 <!--pages/mine/mine.wxml-->
-<view class="mine">
+<view class="mine" hidden="{{phone == ''}}">
   <view class="userinfo">
     <view class="user">
-      <view class="user-phone">15779284973</view>
+      <view class="user-phone">{{phone}}</view>
       <view class="user-level">V0</view>
     </view>
   </view>
@@ -35,31 +35,31 @@
     <view class="block">
       <view>
         <view class="mine-item mine-item-1">
-          <image src="../../images/points_mall.png" alt=""></image>
+          <image src="../../images/mine-page/points_mall.png" alt=""></image>
         </view>
         <text>积分商城</text>
       </view>
       <view>
         <view class="mine-item mine-item-2">
-          <image src="../../images/discount_coupon.png" alt=""></image>
+          <image src="../../images/mine-page/discount_coupon.png" alt=""></image>
 				</view>
         <text>优惠券</text>
       </view>
       <view>
         <view class="mine-item mine-item-3">
-          <image src="../../images/address_list.png" alt=""></image>
+          <image src="../../images/mine-page/address_list.png" alt=""></image>
         </view>
         <text>收货地址</text>
       </view>
       <view>
         <view class="mine-item mine-item-4">
-          <image src="../../images/customer_feedback.png" alt=""></image>
+          <image src="../../images/mine-page/customer_feedback.png" alt=""></image>
         </view>
         <text>客服/反馈</text>
       </view>
       <view>
         <view class="mine-item mine-item-5">
-          <image src="../../images/about_us.png" alt=""></image>
+          <image src="../../images/mine-page/about_us.png" alt=""></image>
         </view>
         <text>关于我们</text>
       </view>
