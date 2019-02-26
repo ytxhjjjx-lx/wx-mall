@@ -3,8 +3,6 @@ let api = require('./utils/api.js');
 
 App({
   onLaunch: function() {
-    //提取原始数据
-    this.getCategories()
     // 读取保存在本地的用户信息
     let userinfo = wx.getStorageSync('userinfo')
     if (userinfo) {
@@ -21,7 +19,6 @@ App({
 
   },
   globalData: {
-    categories: [],
     computedCategories: [],
     // 用户信息
     userinfo: {},
@@ -33,83 +30,81 @@ App({
     favorites: [],
   },
 
-	/* 
-   * 获取原始商品数据
+  /* 
+   * 获取商品数据
    */
-	getCategories() {
+  getComputedCategories(cb) {
 		wx.showLoading({
-			title: '加载商品数据中...',
+			title: '加载数据中...',
 			mask: true
 		})
 		let categories = []
 		let products = []
 		this.fetch(api.host + '/categories')
 			.then(res => {
-				categories = res
-				return this.fetch(api.host + '/products')
+				if (res.length > 0) {
+					categories = res
+					return this.fetch(api.host + '/products')
+				}
 			})
 			.then(res => {
-				products = res
-				wx.hideLoading()
-				for (let i = 0; i < products.length; i++) {
-					for (let j = 0; j < categories.length; j++) {
-						// 归类商品
-						if (categories[j].id === products[i].categoryId) {
-							categories[j].products.push(products[i])
-						}
-					}
-				}
-				this.globalData.categories = categories
-			})
-	},
-
-  /* 
-   * 获取商品数据
-   */
-	getComputedCategories(cb) {
-		let carts = this.globalData.carts
-		let userInfo = this.globalData.userinfo
-		let categories = this.globalData.categories
-		// 若已登录，则与购物车数据同步(此处获取购物车数据，确保首页加载拿到同步后的数据)
-		if (userInfo.id) {
-			this.getCarts(userInfo.id).then(res => {
-				for (let i = 0; i < categories.length; i++) {
-					let products = categories[i].products
-					for (let j = 0; j < products.length; j++) {
-						for (let z = 0; z < res.length; z++) {
-							if (products[j].id === res[z].product_id) {
-								products[j].num = res[z].num
-								break
+				if (res.length > 0) {
+					products = res
+					wx.hideLoading()
+					for (let i = 0; i < products.length; i++) {
+						for (let j = 0; j < categories.length; j++) {
+							// 归类商品
+							if (categories[j].id === products[i].categoryId) {
+								categories[j].products.push(products[i])
 							}
 						}
 					}
-				}
-				this.globalData.computedCategories = categories
-				cb(categories)
-			})
-		} else {
-			//未登录，显示归类后的未同步的数据（仅供查看）
-			this.globalData.computedCategories = categories
-			cb(categories)
-		}
-	},
-	
-	//刷新商品数据
-	resetProductNum(product) {
-		let computedCategories = this.globalData.computedCategories
-		return new Promise((resolve, reject) => {
-			label: for (let i = 0; i < computedCategories.length; i++) {
-				let products = computedCategories[i].products
-				for (let j = 0; j < products.length; j++) {
-					if (products[j].id === product.product_id) {
-						products[j].num = product.num
-						break label
+					let carts = this.globalData.carts
+					let userInfo = this.globalData.userinfo
+					// 若已登录，则与购物车数据同步(此处获取购物车数据，确保首页加载拿到同步后的数据)
+					if (userInfo.id) {
+						this.getCarts(userInfo.id).then(res => {
+							if (res.length > 0) {
+								for (let i = 0; i < categories.length; i++) {
+									let products = categories[i].products
+									for (let j = 0; j < products.length; j++) {
+										for (let z = 0; z < res.length; z++) {
+											if (products[j].id === res[z].product_id) {
+												products[j].num = res[z].num
+												break
+											}
+										}
+									}
+								}
+								this.globalData.computedCategories = categories
+								cb(categories)
+							}
+						}) 
+					} else {
+						//未登录，显示归类后的未同步的数据（仅供查看）
+						this.globalData.computedCategories = categories
+						cb(categories)
 					}
 				}
-			}
-			resolve(computedCategories)
-		})
-	},
+			})
+  },
+
+  //刷新商品数据
+  resetProductNum(product) {
+    let computedCategories = this.globalData.computedCategories
+    return new Promise((resolve, reject) => {
+      label: for (let i = 0; i < computedCategories.length; i++) {
+        let products = computedCategories[i].products
+        for (let j = 0; j < products.length; j++) {
+          if (products[j].id === product.product_id) {
+            products[j].num = product.num
+            break label
+          }
+        }
+      }
+      resolve(computedCategories)
+    })
+  },
 
   /* 
    * 添加到购物车
@@ -143,7 +138,7 @@ App({
                 wx.showToast({
                   title: '添加成功',
                   icon: 'success',
-                  duration: 1000,
+                  duration: 800,
                   mask: true,
                 })
                 this.resetProductNum(res)
@@ -173,7 +168,7 @@ App({
             wx.showToast({
               title: '添加成功',
               icon: 'success',
-              duration: 1000,
+              duration: 800,
               mask: true,
             })
             this.resetProductNum(res)

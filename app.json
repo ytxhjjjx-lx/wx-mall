@@ -11,7 +11,8 @@
 			"root": "packageA",
 			"pages": [
 				"pages/product-item/product-item",
-				"pages/site/site"
+				"pages/site/site",
+				"pages/favorites/favorites"
 			]
 		}
 	],

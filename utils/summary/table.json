@@ -1,0 +1,62 @@
+{
+	"分类列表": {
+		"id": "分类编号",
+		"name": "分类名称",
+		"category_img": "分类图标",
+		"color": "分类颜色",
+		//子分类
+		"cids": [
+			{
+				"name": "子分类名称"
+			}
+		],
+		"products": "[],分类对应的商品"
+	},
+	"商品列表": {
+		"id": "商品编号",
+		"categoryId": "所属分类id",
+		"cidIndex": "所属子分类",
+		"imgs": {
+			"min": "商品小图",
+			"big": "商品大图（详情页展示)"
+		},
+		"name": "商品名称",
+		"price": "商品价格",
+		"unit": "商品单位",
+		"brand": "商品品牌",
+		"expiration_date": "有效期",
+		"num": "商品数量",
+		"details": "商品详情"
+	},
+	"购物车列表": {
+		"id": "商品在购物中表的编号(自动生成)",
+		"product_id": "商品的id",
+		"userId": "用户id",
+		"num": "商品的数量",
+		"product_img": "商品的图片",
+		"product_name": "商品的名称",
+		"product_price": "商品的价格",
+		"checked": "是否选择"
+	},
+	"地址列表": {
+		"id": "地址在地址表中的编号",
+		"userId": "用户id，地址所属的用户",
+		"linkman": "联系人",
+		"sex": "性别",
+		"phone": "手机号码",
+		"city": "城市",
+		"site": "地区",
+		"detailSite": "详细地址,->百度地图",
+		"longitude": "坐标数据x",
+		"latitude": "坐标数据y"
+	},
+	"收藏列表": {
+		"id": "商品在收藏表中的编号",
+		"userId": "用户id, 收藏的商品所属的用户",
+		"product_id": "商品的id",
+		"img(小图)": "商品图片",
+		"name": "商品名称",
+		"unit": "商品的单位",
+		"price": "商品的价格"
+	}
+}

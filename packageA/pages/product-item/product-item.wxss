@@ -80,7 +80,7 @@
   z-index: 100;
 }
 
-.collect-span {
+#collect-span {
   position: absolute;
   left: 16rpx;
   padding-top: 20rpx;
@@ -89,7 +89,7 @@
   background-size: 36rpx auto;
 }
 
-.collect-span.active {
+#collect-span.active {
   background: url('https://s1.ax1x.com/2018/02/05/9KBO41.png') 8rpx 20rpx no-repeat;
   background-size: 36rpx auto;
 }

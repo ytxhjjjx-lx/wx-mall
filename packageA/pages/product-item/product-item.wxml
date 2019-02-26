@@ -22,7 +22,7 @@
       <!-- 底部 -->
       <view  class="footer">
         <view  class="collect">
-          <text class="collect-span">收藏</text>
+          <text id="collect-span" bindtap='favorPro' class="{{isFavored ? 'active' : ''}}">收藏</text>
           <view class="collect-add">
             添加商品：
             <view  class="btn-wrap">

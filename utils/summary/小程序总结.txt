@@ -1,0 +1,15 @@
+1.本地资源图片无法通过wxss文件获取，可以使用网络图片，或者 base64，或者使用<image/>标签.
+2.每次数据更新需要调用setData方法显示到界面上.setData 函数用于将数据从逻辑层发送到视图层（异步），同时改变对应的 this.data 的值（同步）
+3.组件时间处理函数通过dataset数据集传参，如data-id='{{item.id}}'
+4.catch事件绑定可以阻止冒泡事件,capture-catch中断捕获阶段,取消冒泡阶段
+5.wxs功能类似于vue的computed,是小程序的一套脚本语言，结合 WXML，可以构建出页面的结构
+<!--wxml-->
+<wxs module="m1">
+  var msg = "hello world"; 
+  module.exports.message = msg;
+</wxs>
+
+<view>{{m1.message}}</view>
+
+页面输出：
+hello world

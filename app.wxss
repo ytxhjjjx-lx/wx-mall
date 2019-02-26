@@ -17,7 +17,7 @@ page::-webkit-scrollbar, view::-webkit-scrollbar{
   height: 100%;
 }
 
-.main_content {
+.main_content, #main_content {
   position: absolute;
   top: 90rpx;
   left: 0;
@@ -46,6 +46,10 @@ page::-webkit-scrollbar, view::-webkit-scrollbar{
 
 .red_font {
 	color: #e64f1a;
+}
+
+.theme-font-gray{
+  color: #999;
 }
 
 .theme-bg{

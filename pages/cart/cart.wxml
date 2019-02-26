@@ -1,38 +1,37 @@
 <!--pages/cart/cart.wxml-->
 <wxs module="cart_module">
-var total = function (arr) {
-  var result = 0
-  var arr = arr
-  for (var i = 0; i < arr.length; i++) {
-    if (arr[i].checked) {
-      result += (arr[i].num * arr[i].product_price)
+  var total = function(arr) {
+    var result = 0
+    var arr = arr
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i].checked) {
+        result += (arr[i].num * arr[i].product_price)
+      }
     }
+    return result.toFixed(1)
   }
-  return result.toFixed(1)
-}
 
-/*
- * 是否有勾选的商品（都未勾选显示‘满0元起送’）
- */
-var isCheckBol = function(arr) {
-	var checkBol = false
-	for (var i = 0; i < arr.length; i++) {
-    if (arr[i].checked) {
-      checkBol = true
+  /*
+   * 是否有勾选的商品（都未勾选显示‘满0元起送’）
+   */
+  var isCheckBol = function(arr) {
+    var checkBol = false
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i].checked) {
+        checkBol = true
+      }
     }
+    return checkBol
   }
-	return checkBol
-}
 
-module.exports = {
-	isCheckBol: isCheckBol,
-  totalPrice: total
-}
+  module.exports = {
+    isCheckBol: isCheckBol,
+    totalPrice: total
+  }
 </wxs>
 
-
 <view class='container' hidden='{{carts.length == 0}}'>
-  <header-gray headerTitle="购物车" back="false"></header-gray>
+  <header-gray headerTitle="购物车"></header-gray>
   <view class='main_content'>
     <!--地址信息  -->
     <view class='table receive'>
@@ -107,11 +106,9 @@ module.exports = {
                   <text>￥{{item.product_price}}</text>
                 </view>
                 <view class="product-operates">
-                  <text class="inner" catchtap="subProduct"
-									data-pro="{{item}}"> - </text>
+                  <text class="inner" catchtap="subProduct" data-pro="{{item}}"> - </text>
                   <text class="product-operates-item">{{item.num}}</text>
-                  <text class="inner" catchtap="addProduct"
-									data-pro="{{item}}"> + </text>
+                  <text class="inner" catchtap="addProduct" data-pro="{{item}}"> + </text>
                 </view>
               </view>
             </view>
@@ -119,13 +116,24 @@ module.exports = {
         </view>
         <!-- 底部全选 -->
         <view class="group-footer">
-          <text class="{{checkedAll ? 'selectAll-true': 'selectAll-false'}}" bindtap="changeCheckedAll">全选</text>
-          共：
+          <text class="{{checkedAll ? 'selectAll-true': 'selectAll-false'}}" bindtap="changeCheckedAll">全选</text> 共：
           <text class="redfont">￥<text class='red_font'>{{cart_module.totalPrice(carts)}}</text></text>
-					<text class="group-btn" wx:if='{{cart_module.isCheckBol(carts) || checkedAll}}'>选好了</text>
-					<text class="group-btn group-btn1" wx:else>满￥0起送</text>
+          <text class="group-btn" wx:if='{{cart_module.isCheckBol(carts) || checkedAll}}'>选好了</text>
+          <text class="group-btn group-btn1" wx:else>满￥0起送</text>
         </view>
       </view>
+    </view>
+  </view>
+</view>
+
+<!--无商品的时候显示  -->
+<view class='container' hidden='{{carts.length > 0}}'>
+  <header-gray headerTitle="购物车"></header-gray>
+  <view class='main_content'>
+    <view class='empty-notice theme-font-gray'>
+      <view class='notice-icon'></view>
+      <view>亲，购物车空空的耶~ </view>
+      <navigator open-type='switchTab' url='/pages/category/category'>去逛逛~</navigator>
     </view>
   </view>
 </view>

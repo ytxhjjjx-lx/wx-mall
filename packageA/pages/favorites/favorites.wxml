@@ -1,0 +1,33 @@
+<!--packageA/pages/favorites/favorites.wxml-->
+<view class='container'>
+  <header-gray headerTitle="商品收藏"></header-gray>
+  <view class="header-icon" bindtap='editFavorPro'>
+      {{editBol ? '完成' : '编辑'}}
+  </view>
+  <!-- 收藏商品列表 -->
+  <view id="main_content" class="{{editBol ? 'btm' : ''}}">
+    <view class="products white-bg">
+      <view class="product-item-wrap flex_row" wx:for="{{favorPros}}" wx:key="{{item.id}}" data-id="{{item.id}}" bindtap='selectPro'>
+        <view hidden="{{!editBol}}" class="{{item.selected ? 'selected' : ''}}">
+					<text decode='true'>&nbsp; </text>
+        </view>
+        <view class="product-image">
+          <image src='{{item.img}}'></image>
+        </view>
+        <view class='pro-detail flex_column'>
+          <view class="product-name">{{item.name}}</view>
+          <view class="product-promotion">
+						<text decode>&nbsp; </text>
+					</view>
+          <view class="product-specifics theme-font-gray">{{item.unit}}g</view>
+          <view class="product-price-current theme-font">￥{{item.price}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 底部 -->
+  <view class="footer white-bg" hidden='{{!editBol}}'>
+    <text class="{{selectAllBol ? 'selectAll-true' : ''}}" bindtap='checkAll'>全选</text>
+    <text class="themebtn theme-bg" bindtap='deleteFavorPro'>删除</text>
+  </view>
+</view>
