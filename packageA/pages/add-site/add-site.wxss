@@ -1,0 +1,40 @@
+/* packageA/pages/add-site/add-site.wxss */
+.section {
+	height: 100rpx;
+	display: flex;
+	display: -webkit-flex;
+	align-items: center;
+	font-size: 30rpx;
+}
+.section .section__title {
+	width: 25%;
+	text-align: center;
+}
+.section .section_input {
+	width: 70%;
+	position: relative;
+}
+
+.section .section_input.city, .section .section_input.site {
+	height: 100%;
+}
+
+.section .section_input.city picker {
+	height: 100%;
+	line-height: 100rpx;
+}
+
+.section .section_input.site input {
+	height: 100%;
+}
+
+.section .section_input input {
+	width: 100%;
+}
+
+.section .select_city {
+	position: absolute;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+}

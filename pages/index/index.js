@@ -21,10 +21,12 @@ Page({
       })
     } else {
       app.getComputedCategories(computedCategories => {
-				// console.log(computedCategories)
         this.setData({
           categories: computedCategories
         })
+				wx.redirectTo({
+					url: '/packageA/pages/add-site/add-site',
+				})
       })
     }
     // 获取轮播数据

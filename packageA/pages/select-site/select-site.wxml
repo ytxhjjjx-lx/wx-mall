@@ -1,0 +1,13 @@
+<!--packageA/pages/select-site/select-site.wxml-->
+<view class='container'>
+  <view class='search_site flex_row white-bg'>
+    <view class='input_wrap'>
+      <input type="text" class="title-form" placeholder="请输入地址" maxlength="10" bindinput="searchSite" confirm-type="search" />
+      <image src='../../../images/search.png'></image>
+    </view>
+  </view>
+  <view class='main_content'>
+    <!-- 地图 -->
+    <map id="map" longitude="113.324520" latitude="23.099994" markers="{{markers}}" bindregionchange="regionchange" show-location enable-rotate show-compass enable-overlooking style="width: 100%; height: 600rpx;"></map>
+  </view>
+</view>

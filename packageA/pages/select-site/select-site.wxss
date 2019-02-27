@@ -1,0 +1,29 @@
+/* packageA/pages/select-site/select-site.wxss */
+.search_site{
+  height: 90rpx;
+  align-items: center;
+	justify-content: center;
+}
+
+.search_site .input_wrap {
+	width: 50%;
+	position: relative;
+}
+
+.search_site .input_wrap image {
+	position: absolute;
+	left: 9rpx;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 30rpx;
+	height: 30rpx;
+}
+
+.search_site .input_wrap .title-form {
+	width: 100%;
+	border: 1px solid #e0e0e0;
+  border-radius: 6rpx;
+	text-align: left;
+	padding-left: 48rpx;
+	font-size: 30rpx;
+}

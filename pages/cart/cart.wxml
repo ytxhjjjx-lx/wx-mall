@@ -35,9 +35,10 @@
   <view class='main_content'>
     <!--地址信息  -->
     <view class='table receive'>
-      <view class='more'>修改
+			<navigator class='more' url="/packageA/pages/site/site">
+				修改
         <text decode='true'>&gt;</text>
-      </view>
+			</navigator>
       <view class='tr'>
         <view class='th'>
           <!-- 两个英文字符等于一个中文字的宽度 -->

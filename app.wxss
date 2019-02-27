@@ -17,6 +17,19 @@ page::-webkit-scrollbar, view::-webkit-scrollbar{
   height: 100%;
 }
 
+.header-icon {
+  position: absolute;
+  top: 0;
+  right: 12rpx;
+  text-align: center;
+  width: 120rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 28rpx;
+  z-index: 2;
+  color: #777;
+}
+
 .main_content, #main_content {
   position: absolute;
   top: 90rpx;
@@ -75,6 +88,16 @@ page::-webkit-scrollbar, view::-webkit-scrollbar{
   height: 80rpx;
   line-height: 80rpx;
 	font-size: 32rpx;
+}
+
+.pub-footer{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  line-height: 100rpx;
+  height: 100rpx;
+  background-color: #fff;
 }
 
 /* 弹性布局 */

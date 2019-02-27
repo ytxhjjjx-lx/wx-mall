@@ -94,7 +94,7 @@ Page({
 					wx.showToast({
 						title: '登陆成功',
 						icon: 'success',
-						duration: 1000,
+						duration: 800,
 						mask: true,
 						success() {
 							setTimeout(() => {
@@ -129,7 +129,7 @@ Page({
 						wx.showToast({
 							title: '注册成功',
 							icon: 'success',
-							duration: 1000,
+							duration: 800,
 							mask: true,
 							success() {
 								setTimeout(() => {

@@ -61,8 +61,8 @@ App({
 					}
 					let carts = this.globalData.carts
 					let userInfo = this.globalData.userinfo
-					// 若已登录，则与购物车数据同步(此处获取购物车数据，确保首页加载拿到同步后的数据)
 					if (userInfo.id) {
+						// 若已登录，则与购物车数据同步(此处获取购物车数据，确保首页加载拿到同步后的数据)
 						this.getCarts(userInfo.id).then(res => {
 							if (res.length > 0) {
 								for (let i = 0; i < categories.length; i++) {
@@ -80,6 +80,9 @@ App({
 								cb(categories)
 							}
 						}) 
+						// 提取该用户收藏夹，收货地址等信息
+						this.getAddresses(userInfo.id)
+						this.getFavorites(userInfo.id)
 					} else {
 						//未登录，显示归类后的未同步的数据（仅供查看）
 						this.globalData.computedCategories = categories

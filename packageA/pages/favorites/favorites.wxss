@@ -1,18 +1,5 @@
 /* packageA/pages/favorites/favorites.wxss */
 
-.header-icon {
-  position: absolute;
-  top: 0;
-  right: 12rpx;
-  text-align: center;
-  width: 120rpx;
-  height: 90rpx;
-  line-height: 90rpx;
-  font-size: 28rpx;
-  z-index: 2;
-  color: #777;
-}
-
 #main_content.btm {
   bottom: 100rpx;
 }
