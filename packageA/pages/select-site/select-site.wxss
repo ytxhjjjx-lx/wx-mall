@@ -1,29 +1,86 @@
 /* packageA/pages/select-site/select-site.wxss */
-.search_site{
+
+.search_site {
   height: 90rpx;
   align-items: center;
-	justify-content: center;
+  justify-content: center;
 }
 
 .search_site .input_wrap {
-	width: 50%;
-	position: relative;
+  width: 50%;
+  position: relative;
 }
 
 .search_site .input_wrap image {
-	position: absolute;
-	left: 9rpx;
-	top: 50%;
-	transform: translateY(-50%);
-	width: 30rpx;
-	height: 30rpx;
+  position: absolute;
+  left: 9rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30rpx;
+  height: 30rpx;
 }
 
 .search_site .input_wrap .title-form {
-	width: 100%;
-	border: 1px solid #e0e0e0;
+  width: 100%;
+  border: 1px solid #e0e0e0;
   border-radius: 6rpx;
-	text-align: left;
-	padding-left: 48rpx;
-	font-size: 30rpx;
+  text-align: left;
+  padding-left: 48rpx;
+  font-size: 30rpx;
 }
+
+.site_list {
+	position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 30rpx;
+  background-color: #fff;
+  overflow-y: scroll;
+}
+
+/* 地点检索列表样式 */
+
+.pois-list {
+  top: 400rpx;
+}
+
+.pois-list .pois-item-wrap {
+  cursor: pointer;
+  padding: 10rpx 0;
+  font-size: 28rpx;
+}
+
+.pois-list .pois-item-wrap .pois-item {
+  line-height: 60rpx;
+}
+
+.pois-list .pois-item-wrap:first-child .pois-item-name {
+  color: #f40;
+  padding-left: 32rpx;
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAABHCAMAAACdzI/PAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAF3UExURUxpcf9BAP9EAP9DAP9VAP84AP9DAP9DAP9GAP9DAP9DAP9DAP9CAP9EAP9IAP9EAP9DAP9EAP9EAP9FAP9DAP9EAP9EAP9EAP9DAP9EAP9EAP9EAP9CAP9EAP9VAP9EAP9DAP9DAP9DAP9EAP9EAP9EAP9EAP9FAP9EAP9EAP9EAP9EAP9FAP9DAP9DAP9DAP9CAP9DAP9FAP9EAP9DAP9EAP9DAP9EAP9GAP9DAP9EAP9CAP9EAP9FAP9DAP9DAP9EAP9EAP9EAP8/AP9EAP9EAP9DAP9EAP9CAP9GAP9EAP9EAP////93Rf/9/P+PZv+0mf/RwP/y7f9GA/+EV/9PD//7+f9aHv9TFf+lhP/08P/Muv+5n//49v9NDP+wk/97S/9REv9nMP9eJP/azP/w6v/p4f9YG/+Ycv+ylv9lLf+ee/9hJ//28/+CVP+piv9pM/+rjf/e0v/Kt/+KYP9IBv99Tv+GWv+9pf9LCf+NY//Bq//l2+fc2asAAABLdFJOUwAnluoDCe35Esyfcht+FfD859Iwsbdp4d4P9ng2HgZOSIGi88OlWkI85MmZIb1mkEWEUZyTbK6oJMBvKrpgVzmNLcYM1T/PXVQztA90GQIAAAJ2SURBVEjHrZbnW9swEMbl4CQmiwwCIc0GCrTMFrpbupcECSlQKFCg0L33/OMbMhrdSbbPz9P3m+T7PdY4vXeMqTKm59O9R6pE78YYQbOhHi4rGY04A/6FQa4qveiAXE5wvS4ZNsTkCLdVsGzqkGIfd9KIZlth7qLBixi5yl0VyEHkGCeo55yMXOEkZSzp4odpDO//h5i9nKqBDjNARnignX9WH53hp1tMVPNp6UWttvvroSYh8s28DOD5x5t10dLhngLNHDF3lH88FV193sc7KjSYNJqsLgtZf/ACTzWWFoRTexAR4tOacgolOLPxSGBto1xlrAxnXiqIWH4CQyKsH4z311VG/IBMid0E4y8aROw8ADELDLpMTccIuLgyg8e2pWXegRgfg2td0TLfEQMT9LeW+QZi5hk0wY9a5g2ImWO3wXhVh9ThuYXR/fx8q2F24Z6L+PW8VpH15zDEYLPo7TxTmE0YMWwyP/KcVzsI2YK74fcb76eCnxzM7JU1jfXcw+/04FDK6fdfsSE0nWdKefOr7XSobx8o3ypN3xnX+M7GUrVa/aAzq1TLrEIe/O1k20etBBmZGOqY7xiZKXULwxwRCckF6CwJSQ6BxuAEpc7lYXGMZVyRbA4X4WtuFSVeVIv9WJBY4mQdd0Si+ubFqeD77Hokny0yatoxZtoGmSrYN2NWhnCXWKms7i5dOkXN4QXH3frRGYW54NrDFnDmjRIaXwPmw4RF6ZbDuLQTZF6XkDOMplS823VEiIyUQ9NUhFmdtuk8o6t9DHHDA3MjodoM7UfBSU+MPyH5LFWNNxvPe2RiWamZpirEb3lmUknmXTn2P/UXm52IzqJ32kUAAAAASUVORK5CYII=") left center no-repeat;
+  -webkit-background-size: auto 60%;
+  background-size: auto 60%;
+}
+
+/* 搜索列表样式 */
+
+.sug-list .sug-item-wrap {
+  cursor: pointer;
+  padding: 10rpx 0;
+  font-size: 28rpx;
+}
+
+.sug-list .sug-item-wrap .pois-item {
+  line-height: 60rpx;
+}
+
+.sug-list .sug-item-wrap:first-child {
+  border-top: 1px solid #e0e0e0;
+}
+
+#map {
+  font-size: 24rpx;
+}
+

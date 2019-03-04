@@ -28,6 +28,12 @@ App({
     addresses: [],
     // 收藏夹数据
     favorites: [],
+		//用户所选收货地址
+		selectedSite: {},
+		//所选城市对象
+		selectedCity: {},
+		// 是否从select-site页面进入add-site页
+		selectSiteBol: false
   },
 
   /* 

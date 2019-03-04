@@ -13,6 +13,9 @@ Page({
   //事件处理函数
   bindViewTap: function() {},
   onLoad: function() {
+		wx.redirectTo({
+			url: '/packageA/pages/site/site',
+		})
     //提取商品数据（已登录拿到同步后的数据）
     let computedCategories = app.globalData.computedCategories
     if (computedCategories.length > 0) {
@@ -24,9 +27,6 @@ Page({
         this.setData({
           categories: computedCategories
         })
-				wx.redirectTo({
-					url: '/packageA/pages/add-site/add-site',
-				})
       })
     }
     // 获取轮播数据

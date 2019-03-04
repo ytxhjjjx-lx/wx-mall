@@ -8,6 +8,24 @@
   </view>
   <view class='main_content'>
     <!-- 地图 -->
-    <map id="map" longitude="113.324520" latitude="23.099994" markers="{{markers}}" bindregionchange="regionchange" show-location enable-rotate show-compass enable-overlooking style="width: 100%; height: 600rpx;"></map>
+    <map id="map" longitude="{{x}}" latitude="{{y}}" markers="{{markers}}" bindmarkertap="markertap" show-location="true" enable-rotate="true" show-compass="true" enable-overlooking="true" style="width: 100%; height: 400rpx;"></map>
+		<!-- 根据所选地址检索周边地址列表 -->
+    <scroll-view scroll-y class='site_list pois-list'>
+      <view class='pois-item-wrap' wx:for="{{posi_list}}" wx:key="{{item.id}}" data-item="{{item}}" bindtap='selectSite'>
+        <view class='spline-bottom'>
+          <view class='pois-item pois-item-name'>{{item.title}}</view>
+          <view class='no_wrap pois-item theme-font-gray'>{{item.address}}</view>
+        </view>
+      </view>
+    </scroll-view>
+		<!-- 搜索地址列表 -->
+    <scroll-view scroll-y class='site_list sug-list' hidden='{{!(searchResults.length>0)}}'>
+      <view class='sug-item-wrap' wx:for="{{searchResults}}" wx:key="{{item.id}}" data-item="{{item}}" bindtap='selectSite'>
+        <view class='spline-bottom'>
+          <view class=" pois-item pois-item-name">{{item.title}}</view>
+          <view class="no_wrap pois-item theme-font-gray">{{item.address}}</view>
+        </view>
+      </view>
+    </scroll-view>
   </view>
 </view>

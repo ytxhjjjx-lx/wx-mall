@@ -9,13 +9,14 @@
       <view class="section spline-top">
         <view class="section__title">联系人</view>
         <view class='section_input'>
-          <input type='text' maxlength="8" name="linkman_input" placeholder="收货人姓名" value='{{linkman}}'/>
+          <input type='text' maxlength="8" name="linkman_input" placeholder="收货人姓名" value='{{linkman || selectedSite.linkman}}'
+					bindinput='input_linkman'/>
         </view>
       </view>
       <view class="section spline-top">
         <view class="section__title">性别</view>
         <view class='section_input'>
-          <radio-group name="radio-group">
+          <radio-group name="radio-group" bindchange="selectSex">
             <label wx:for="{{sexArr}}" wx:key="{{index}}">
               <radio value="{{item.name}}" checked='{{item.checked}}' color='yellow'/> {{item.value}}
             </label>
@@ -25,13 +26,14 @@
       <view class="section spline-top">
         <view class="section__title">手机号码</view>
         <view class='section_input'>
-          <input type='number' maxlength="11" name="phone_input" placeholder="联系您的电话" value='{{phone}}' />
+          <input type='number' maxlength="11" name="phone_input" placeholder="联系您的电话" value='{{phone || selectedSite.phone}}' 
+					bindinput='input_phone'/>
         </view>
       </view>
       <view class="section spline-top">
         <view class="section__title">所在城市</view>
 				<view class='section_input city'>
-					<picker bindchange="bindPickerChange" range-key="{{key}}" value="{{index}}" range="{{cityArr}}" bindchange="selectCity">
+					<picker range-key="{{key}}" value="{{index}}" range="{{cityArr}}" bindchange="selectCity">
 						<view class="picker">
 							{{cityArr[index].city}}
 						</view>
@@ -41,15 +43,15 @@
       </view>
       <view class="section spline-top">
         <view class="section__title">所在地区</view>
-        <navigator url='/packageA/pages/select-site/select-site' class='section_input site'>
-          <input value='' name="site_input" disabled placeholder="请选择您的住宅、小区或公司" value='{{site}}'/>
+        <view class='section_input site' bindtap='selectsite'>
+          <input name="site_input" disabled placeholder="请选择您的住宅、小区或公司" value='{{site || selectedSite.site}}' class='no_wrap'/>
 					<text decode class='select_city'>&gt;</text>
-        </navigator>
+        </view>
       </view>
       <view class="section spline-top">
         <view class="section__title">详细地址</view>
         <view class='section_input'>
-          <input name="detail_site_input" maxlength="20" placeholder="请输入楼号、门牌号等详细信息"  value='{{detailSite}}'/>
+          <input name="detail_site_input" maxlength="20" placeholder="请输入楼号、门牌号等详细信息"  value='{{detailSite || selectedSite.detailSite}}' class='no_wrap' bindinput='input_deSite'/>
         </view>
       </view>
     </view>
