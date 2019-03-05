@@ -66,10 +66,23 @@ Page({
 		}
 		app.fetch(api.host + '/users/' + userinfo.id, 'put', userObj)
 		.then(res => {
+			let userObj = res
+			return new Promise((resolve, reject) => {
+				//更新存储数据
+				wx.setStorage({
+					key: 'userinfo',
+					data: JSON.stringify(userObj),
+					success() {
+						resolve()
+					}
+				})
+			})			
+		}).then(res => {
 			//跳转到购物车页面
-			
-		})
-		
+			wx.switchTab({
+				url: '/pages/cart/cart',
+			})
+		})		
 	},
 
 })

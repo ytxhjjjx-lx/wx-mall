@@ -36,7 +36,7 @@ Page({
     linkman: '',
     //编辑地址通过该对象操作保存数据，添加地址通过以上参数操作保存数据
     selectedSite: {},
-		userinfo: {}
+    userinfo: {}
   },
 
   /**
@@ -44,11 +44,12 @@ Page({
    */
   onLoad: function(options) {
     let id = options.siteId
-		let userinfo = app.globalData.userinfo
-		this.setData({
-			userinfo: userinfo,
-			sites: app.globalData.addresses
-		})
+    let userinfo = app.globalData.userinfo
+		console.log(app.globalData.addresses)
+    this.setData({
+      userinfo: userinfo,
+      sites: app.globalData.addresses
+    })
     this.getCitys().then(res => {
       //编辑地址
       if (id) {
@@ -109,7 +110,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-		console.log(app.globalData.userinfo)
     //从选择地址页进入
     if (app.globalData.selectSiteBol) {
       app.globalData.selectSiteBol = false
@@ -171,11 +171,11 @@ Page({
     })
   },
 
-	selectsite() {
-		wx.navigateTo({
-			url: '/packageA/pages/select-site/select-site'
-		})
-	},
+  selectsite() {
+    wx.navigateTo({
+      url: '/packageA/pages/select-site/select-site'
+    })
+  },
 
   //保存地址
   addSite() {
@@ -185,83 +185,96 @@ Page({
         let url = api.host + '/addresses'
         let siteObj = {
           userId: this.data.userinfo.id,
-					linkman: this.data.linkman,
-					sex: this.data.sex,
-					phone: this.data.phone,
-					city: this.data.city,
-					site: this.data.site,
-					detailSite: this.data.detailSite,
-					x: this.data.x,
-					y: this.data.y
+          linkman: this.data.linkman,
+          sex: this.data.sex,
+          phone: this.data.phone,
+          city: this.data.city,
+          site: this.data.site,
+          detailSite: this.data.detailSite,
+          x: this.data.x,
+          y: this.data.y
         }
-				let sites = this.data.sites
-				let userinfo = this.data.userinfo
+        let sites = this.data.sites
+        let userinfo = this.data.userinfo
         app.fetch(url, 'post', siteObj).then(res => {
-					if (res.id) {
-						app.globalData.addresses.push(res)
-						sites.push(res)
-						this.setData({
-							sites: sites
-						})
-						//将该地址作为用户默认选择地址
-						let url = api.host + '/users/' + userinfo.id
-						let userObj = {
-							phone: userinfo.phone,
-							id: userinfo.id,
-							selectSite: res
-						}
-						return app.fetch(url, 'put', userObj)
-					}
-				}).then(res => {
-					if (res.id) {
-						app.globalData.userinfo = res
-						userinfo = res
-						this.setData({
-							userinfo: userinfo
-						})
-						wx.showToast({
-							title: '添加成功',
-							icon: 'success',
-							duration: 800,
-							mask: true,
-						})
-					}
-				})
+          if (res.id) {
+						this.resetSitesData(res, app.globalData.addresses)
+						this.resetSitesData(res, sites)
+            this.setData({
+              sites: sites
+            })
+            //将该地址作为用户默认选择地址
+            let url = api.host + '/users/' + userinfo.id
+            let userObj = {
+              phone: userinfo.phone,
+              id: userinfo.id,
+              selectSite: res
+            }
+            return app.fetch(url, 'put', userObj)
+          }
+        }).then(res => {
+          if (res.id) {
+            return new Promise((resolve, reject) => {
+              app.globalData.userinfo = res
+              userinfo = res
+              this.setData({
+                userinfo: userinfo
+              })
+              //更新存储数据
+              wx.setStorage({
+                key: 'userinfo',
+                data: JSON.stringify(res),
+								success() {
+									resolve()
+								}
+              })
+              wx.showToast({
+                title: '添加成功',
+                icon: 'success',
+                duration: 800,
+                mask: true,
+              })
+            })
+          }
+        }).then(res => {
+          wx.redirectTo({
+            url: '/packageA/pages/site/site',
+          })
+        })
       } else {
-				wx.showModal({
-					title: '提示',
-					content: '请填写完整的信息',
-					success(res) {
-					}
-				})
+        wx.showModal({
+          title: '提示',
+          content: '请填写完整的信息',
+          success(res) {}
+        })
       }
     } else {
       //修改
-			let selectedSite = this.data.selectedSite
-			let sites = this.data.sites
-			let url = api.host + '/addresses/' + selectedSite.id
-			app.fetch(url, 'put', selectedSite).then(res => {
-				if (res.id) {
-					for (let site of sites) {
-						if (site.id == res.id) {
-							site = res
-						}
-					}
-					this.setData({
-						sites: sites
-					})
-					wx.showToast({
-						title: '修改成功',
-						icon: 'success',
-						duration: 800,
-						mask: true,
-					})
-				}
-			})
+      let selectedSite = this.data.selectedSite
+      let sites = this.data.sites
+      let url = api.host + '/addresses/' + selectedSite.id
+      app.fetch(url, 'put', selectedSite).then(res => {
+        if (res.id) {
+          for (let site of sites) {
+            if (site.id == res.id) {
+              site = res
+            }
+          }
+          this.setData({
+            sites: sites
+          })
+          wx.showToast({
+            title: '修改成功',
+            icon: 'success',
+            duration: 800,
+            mask: true,
+          })
+        }
+      })
     }
   },
 
-	//初始化城市坐标系数据信息
+  //初始化城市坐标系数据信息
   init_xy_info(index, cityArr) {
     app.globalData.selectedCity = cityArr[index]
     let city = cityArr[index].city
@@ -279,55 +292,68 @@ Page({
     })
   },
 
-	input_linkman (e) {
-		let val = e.detail.value
-		if (addBol) {
-			this.setData({
-				linkman: val
-			})
-		} else {
-			let selectedSite = this.data.selectedSite
-			selectedSite.linkman = val
-			this.setData({
-				selectedSite: selectedSite
-			})
-			this.resetGlobalSelectedSite(selectedSite)
-		}
-	},
+  input_linkman(e) {
+    let val = e.detail.value
+    if (addBol) {
+      this.setData({
+        linkman: val
+      })
+    } else {
+      let selectedSite = this.data.selectedSite
+      selectedSite.linkman = val
+      this.setData({
+        selectedSite: selectedSite
+      })
+      this.resetGlobalSelectedSite(selectedSite)
+    }
+  },
 
-	input_phone (e) {
-		let val = e.detail.value
-		if (addBol) {
-			this.setData({
-				phone: val
-			})
-		} else {
-			let selectedSite = this.data.selectedSite
-			selectedSite.phone = val
-			this.setData({
-				selectedSite: selectedSite
-			})
-			this.resetGlobalSelectedSite(selectedSite)
-		}
-	},
+  input_phone(e) {
+    let val = e.detail.value
+    if (addBol) {
+      this.setData({
+        phone: val
+      })
+    } else {
+      let selectedSite = this.data.selectedSite
+      selectedSite.phone = val
+      this.setData({
+        selectedSite: selectedSite
+      })
+      this.resetGlobalSelectedSite(selectedSite)
+    }
+  },
 
-	input_deSite (e) {
-		let val = e.detail.value
-		if (addBol) {
-			this.setData({
-				detailSite: val
-			})
-		} else {
-			let selectedSite = this.data.selectedSite
-			selectedSite.detailSite = val
-			this.setData({
-				selectedSite: selectedSite
-			})
-			this.resetGlobalSelectedSite(selectedSite)
-		}
-	},
+  input_deSite(e) {
+    let val = e.detail.value
+    if (addBol) {
+      this.setData({
+        detailSite: val
+      })
+    } else {
+      let selectedSite = this.data.selectedSite
+      selectedSite.detailSite = val
+      this.setData({
+        selectedSite: selectedSite
+      })
+      this.resetGlobalSelectedSite(selectedSite)
+    }
+  },
 
-	resetGlobalSelectedSite(selectedSite) {
-		app.globalData.selectedSite = selectedSite
+  resetGlobalSelectedSite(selectedSite) {
+    app.globalData.selectedSite = selectedSite
+  },
+
+	//更新地址数据
+	resetSitesData (siteObj, siteArr) {
+		let addBol = true 
+		for (let site of siteArr) {
+			if (site.id == siteObj.id) {
+				addBol = false
+			}
+		}
+		if (addBol) {
+			siteArr.push(siteObj)
+		}
 	}
 })

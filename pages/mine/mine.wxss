@@ -158,7 +158,7 @@
   flex-flow: row wrap;
 }
 
-.block > view {
+.block > view, .block > navigator {
   width: 25%;
   height: 200rpx;
   display: flex;

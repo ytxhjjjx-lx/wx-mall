@@ -11,11 +11,11 @@
     <view class='addr-list block'>
       <view class='addr-item spline-bottom white-bg' wx:for="{{sites}}" wx:key="{{item.id}}">
         <view class='{{userinfo.selectSite.id == item.id ? "addr-desc selected" : "addr-desc"}}' data-site="{{item}}" bindtap="changeSelectedSite">
-          <view class='no-wrap'>
+          <view class='no_wrap'>
             <text decode>{{item.linkman}}&nbsp;&nbsp;&nbsp;{{item.phone}}</text>
           </view>
-          <view class='no-wrap theme-font-gray'>
-            <text class='no_wrap' decode>{{item.city}}&nbsp;{{item.site}}{{item.detailSite}}</text>
+          <view class='no_wrap theme-font-gray'>
+            <text decode>{{item.city}}&nbsp;&nbsp;{{item.site}}&nbsp;&nbsp;{{item.detailSite}}</text>
           </view>
         </view>
         <navigator class='addr-edit' url="/packageA/pages/add-site/add-site?siteId={{item.id}}">

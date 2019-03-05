@@ -45,12 +45,12 @@
 				</view>
         <text>优惠券</text>
       </view>
-      <view>
+      <navigator url='/packageA/pages/site/site'>
         <view class="mine-item mine-item-3">
           <image src="../../images/mine-page/address_list.png" alt=""></image>
         </view>
         <text>收货地址</text>
-      </view>
+      </navigator>
       <view>
         <view class="mine-item mine-item-4">
           <image src="../../images/mine-page/customer_feedback.png" alt=""></image>

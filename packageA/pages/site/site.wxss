@@ -41,7 +41,7 @@
   position: absolute;
   left: 0;
   top: 10rpx;
-  right: 160rpx;
+  right: 170rpx;
   bottom: 10rpx;
   line-height: 56rpx;
   padding-top: 14rpx;

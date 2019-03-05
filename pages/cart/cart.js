@@ -13,28 +13,171 @@ Page({
     receive_time: '',
     //送货时间列表
     receive_time_list: [
-      '今天',
-      '30分钟送达',
-      '15:00-16:00',
-      '16:00-17:00',
-      '17:00-18:00',
-      '18:00-19:00',
-      '明天',
-      '明天 09:00-10:00',
-      '明天 10:00-11:00',
-      '明天 11:00-12:00',
-      '明天 12:00-13:00',
-      '后天',
-      '后天 09:00-10:00',
-      '后天 10:00-11:00',
-      '后天 11:00-12:00',
-      '明天 12:00-13:00',
+			{
+				title: '30分钟送达',
+				time: 'limit',
+				select: false
+			},
+			{
+				title: '今天15:00-16:00',
+				time: '15',
+				select: false
+			},
+			{
+				title: '今天16:00-17:00',
+				time: '16',
+				select: false
+			},
+			{
+				title: '今天17:00-18:00',
+				time: '17',
+				select: false
+			},
+			{
+				title: '今天18:00-19:00',
+				time: '18',
+				select: false
+			},
+			{
+				title: '',
+				time: '0',
+				select: false
+			},
+			{
+				title: '明天09:00-10:00',
+				time: '9',
+				select: false
+			},
+			{
+				title: '明天10:00-11:00',
+				time: '10',
+				select: false
+			},
+			{
+				title: '明天11:00-12:00',
+				time: '11',
+				select: false
+			},
+			{
+				title: '明天12:00-13:00',
+				time: '12',
+				select: false
+			},
+			{
+				title: '明天14:00-15:00',
+				time: '14',
+				select: false
+			},
+			{
+				title: '明天15:00-16:00',
+				time: '15',
+				select: false
+			},
+			{
+				title: '明天16:00-17:00',
+				time: '16',
+				select: false
+			},
+			{
+				title: '明天17:00-18:00',
+				time: '17',
+				select: false
+			},
+			{
+				title: '明天18:00-19:00',
+				time: '18',
+				select: false
+			},
+			{
+				title: '明天19:00-20:00',
+				time: '19',
+				select: false
+			},
+			{
+				title: '明天20:00-21:00',
+				time: '20',
+				select: false
+			},
+			{
+				title: '明天21:00-22:00',
+				time: '21',
+				select: false
+			},
+			{
+				title: '',
+				time: '0',
+				select: false
+			},
+			{
+				title: '后天09:00-10:00',
+				time: '9',
+				select: false
+			},
+			{
+				title: '后天10:00-11:00',
+				time: '10',
+				select: false
+			},
+			{
+				title: '后天11:00-12:00',
+				time: '11',
+				select: false
+			},
+			{
+				title: '后天12:00-13:00',
+				time: '12',
+				select: false
+			},
+			{
+				title: '后天14:00-15:00',
+				time: '14',
+				select: false
+			},
+			{
+				title: '后天15:00-16:00',
+				time: '15',
+				select: false
+			},
+			{
+				title: '后天16:00-17:00',
+				time: '16',
+				select: false
+			},
+			{
+				title: '后天17:00-18:00',
+				time: '17',
+				select: false
+			},
+			{
+				title: '后天18:00-19:00',
+				time: '18',
+				select: false
+			},
+			{
+				title: '后天19:00-20:00',
+				time: '19',
+				select: false
+			},
+			{
+				title: '后天20:00-21:00',
+				time: '20',
+				select: false
+			},
+			{
+				title: '后天21:00-22:00',
+				time: '21',
+				select: false
+			},
     ],
     //收货备注
     receive_remark: '',
     carts: [],
 		totalPrice: 0,
-		checkedAll: true
+		checkedAll: true,
+		linkman: '',
+		site: '',
+		phone: '',
+		sex: 'male'
   },
 
   /**
@@ -55,6 +198,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+		let userinfo = app.globalData.userinfo
+		this.setData({
+			linkman: userinfo.selectSite.linkman,
+			phone: userinfo.selectSite.phone,
+			site: userinfo.selectSite.site + ' ' + userinfo.selectSite.detailSite,
+			sex: userinfo.selectSite.sex
+		})
 		this.checkLoginState()
   },
 
@@ -89,7 +239,7 @@ Page({
   chooseTime(event) {
     // 获取点击的时间
     let time = event.currentTarget.dataset.time;
-    if (time !== '今天' && time !== '明天' && time !== '后天') {
+    if (time !== '0' && time !== 'limit') {
       this.setData({
         receive_time: time,
         showSelect: true

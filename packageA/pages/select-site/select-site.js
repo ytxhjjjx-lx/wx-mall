@@ -45,7 +45,6 @@ Page({
     app.globalData.selectSiteBol = true
     let selectedSite = app.globalData.selectedSite
 		let selectedCity = app.globalData.selectedCity
-		console.log(selectedCity)
     this.setData({
       selectCity: selectedSite.city,
 			selectedCity: selectedCity
@@ -138,7 +137,6 @@ Page({
         address_format: 'short',
         success: function(res) {
           resolve(res)
-          console.log(res)
         },
         fail: function(res) {
           reject(res);
