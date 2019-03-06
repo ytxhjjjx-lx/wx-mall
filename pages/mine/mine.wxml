@@ -7,7 +7,7 @@
     </view>
   </view>
   <view class="favorite">
-    <navigator url="/packageA/pages/favorites/favorites" class="goodFavorite item">
+    <navigator url="/packageB/pages/favorites/favorites" class="goodFavorite item">
       <text class="inner">商品收藏</text>
     </navigator>
     <view class="split"></view>

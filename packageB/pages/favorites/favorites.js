@@ -18,7 +18,6 @@ Page({
 	 */
 	onLoad: function (options) {
 		let favorPros = app.globalData.favorites
-		console.log(favorPros)
 		favorPros = favorPros.map(pro => {
 			pro.selected = false
 			return pro

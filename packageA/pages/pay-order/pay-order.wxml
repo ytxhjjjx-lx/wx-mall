@@ -1,0 +1,86 @@
+<!--packageA/pages/payOrder/pay-order.wxml-->
+<view class='container'>
+	<header-gray headerTitle="订单详情"></header-gray>
+	<view class='main_content'>
+		<view class='state white-bg'>
+			<text>订单状态：</text>
+			<text class="{{order_state ? 'green_font' : 'red_font'}}">{{order_state ? '已支付，待发货' : '待支付'}}</text>
+		</view>
+		<!-- 订单编号信息 -->
+		<view class='order-info info white-bg'>
+			<view class='flex_row'>
+				<text>订<text class='text-hidden'>a</text>单<text class='text-hidden'>a</text>号 :</text>
+				<text class='no_wrap'>{{order_no}}</text>
+			</view>
+			<view class='flex_row'>
+				<text>收<text class='text-hidden'>a</text>货<text class='text-hidden'>a</text>码 :</text>
+				<text>{{dilivery_code}}</text>
+			</view>
+			<view class='flex_row'>
+				<text>下单时间 :</text>
+				<text>{{place_order_time}}</text>
+			</view>
+			<view class='flex_row'>
+				<text>收货时间 :</text>
+				<text>{{dilivery_time.title}}</text>
+			</view>
+			<view class='flex_row'>
+				<text>支付方式 :</text>
+				<text>{{pay_way}}</text>
+			</view>
+		</view>
+		<!-- 收货地址信息 -->
+		<view class='site-info info white-bg'>
+			<view class='flex_row'>
+				<text>收<text class='text-hidden'>a</text>货<text class='text-hidden'>a</text>人 :</text>
+				<text>{{userinfo.selectSite.linkman}}</text>
+				<text class='text-hidden'>aa</text>
+				<text>{{userinfo.phone}}</text>
+			</view>
+			<view class='flex_row'>
+				<text>收货地址 :</text>
+				<text class='no_wrap'>{{userinfo.selectSite.detailSite}}</text>
+			</view>
+		</view>
+		<!-- 费用明细信息 -->
+		<view class='fee-info info white-bg'>
+			<view class='theme-font-gray'>费用明细</view>
+			<view wx:for="{{pros}}" wx:key="{{index}}" class='cont spline-top flex_row'>
+				<text class='name no_wrap'>{{item.product_name}}</text>
+				<text class='flr num'>x{{item.num}}</text>
+				<text class='flr price'>￥{{item.product_price}}</text>
+			</view>
+			<view class='details spline-top spline-bottom'>
+				<view class='cont fee'>
+					<text>商品总额</text>
+					<text class='flr'>￥{{total_amount}}</text>
+				</view>
+				<view class='cont fee'>
+					<text>配送费</text>
+					<text class='flr'>￥{{dilivery_amount}}</text>
+				</view>
+				<view class='cont fee'>
+					<text>服务费</text>
+					<text class='flr'>￥0</text>
+				</view>
+				<view class='cont fee'>
+					<text>配送费减免</text>
+					<text class='flr'>￥{{dilivery_amount_reduct}}</text>
+				</view>
+				<view class='cont fee'>
+					<text>优惠券</text>
+					<text class='flr'>￥0</text>
+				</view>
+			</view>
+			<view class='payed'>
+				<text class='flr'>实付：<text class='red_font'>￥{{total_amount}}</text></text>
+			</view>
+		</view>
+		<!-- 支付 -->
+    <view class='place-order white-bg'>
+      <view class='theme-bg flr' bindtap='toMyOrder'>我的订单</view>
+      <view class='theme-bg flr' bindtap='cancelOrder'>取消订单</view>
+			<view class='theme-bg flr' bindtap='toPay'>去支付</view>
+    </view>
+	</view>
+</view>

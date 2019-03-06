@@ -7,12 +7,37 @@ const formatTime = date => {
   const minute = date.getMinutes()
   const second = date.getSeconds()
 
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
 const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
+}
+
+//生成随机订单号, 收货码
+const getCode = () => {
+	let arr = ['1234567890', 'qwertyuiopasdfghjklzxcvbnm1234567890']
+	let length = 0
+	let str = ''
+	let codeStr = ''
+	return ['goodsCode', 'orderNo'].map(item => {
+		if (item.startsWith('g')) {
+			length = 4
+			str = arr[0]
+			codeStr = ''
+		}
+		if (item.startsWith('o')) {
+			length = 20
+			str = arr[1]
+			codeStr = ''
+		}
+		for (let i = 0; i < length; i++) {
+			let index = Math.floor(Math.random() * str.length)
+			codeStr += str.charAt(index)
+		}
+		return codeStr
+	})
 }
 
 //验证手机号
@@ -47,5 +72,6 @@ module.exports = {
 	// 防抖
 	debounce: debounce,
   formatTime: formatTime,
-	checkPhone: checkPhone
+	checkPhone: checkPhone,
+	getCode: getCode
 }

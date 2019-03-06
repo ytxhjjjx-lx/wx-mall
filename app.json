@@ -14,6 +14,14 @@
 				"pages/site/site",
 				"pages/add-site/add-site",
 				"pages/select-site/select-site",
+				"pages/checkout/checkout",
+				"pages/pay-order/pay-order"
+			]
+		},
+		{
+			"root": "packageB",
+			"pages": [
+				"pages/my-orders/my-orders",
 				"pages/favorites/favorites"
 			]
 		}

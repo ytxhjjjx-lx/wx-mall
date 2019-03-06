@@ -14,7 +14,7 @@ Page({
   bindViewTap: function() {},
   onLoad: function() {
 		wx.redirectTo({
-			url: '/packageA/pages/site/site',
+			url: '/pages/cart/cart',
 		})
     //提取商品数据（已登录拿到同步后的数据）
     let computedCategories = app.globalData.computedCategories

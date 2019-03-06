@@ -98,8 +98,8 @@
 .cart-group .group-proptext {
   color: #999;
   padding-left: 28rpx;
-  height: 40rpx;
-  line-height: 40rpx;
+  height: 50rpx;
+  line-height: 50rpx;
 }
 
 .group-receive {

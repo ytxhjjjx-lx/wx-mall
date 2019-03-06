@@ -61,6 +61,10 @@ page::-webkit-scrollbar, view::-webkit-scrollbar{
 	color: #e64f1a;
 }
 
+.green_font {
+	color: green;
+}
+
 .theme-font-gray{
   color: #999;
 }
@@ -112,3 +116,6 @@ page::-webkit-scrollbar, view::-webkit-scrollbar{
   flex-flow: column nowrap;
 }
 
+.flr {
+	float: right;
+}

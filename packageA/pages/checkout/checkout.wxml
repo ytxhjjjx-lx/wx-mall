@@ -1,0 +1,69 @@
+<!--packageA/pages/checkout/checkout.wxml-->
+<view class='container'>
+  <header-gray headerTitle="结算付款"></header-gray>
+  <view class='main_content'>
+    <!-- 支付方式 -->
+    <view class='pay-way white-bg wrap'>
+      <view class='wrap-head theme-font-gray'>选择支付方式</view>
+      <view wx:for="{{pay_ways}}" wx:key="{{index}}" class="{{'payWay ' + item.cls + ' spline-top cont'}}" data-way='{{item.title}}' bindtap='changePayWay'>
+        {{item.title}}
+        <image hidden='{{pay_way != item.title}}' src='/images/checkbox-selectd.png'></image>
+      </view>
+    </view>
+
+    <view class='coupons white-bg wrap'>
+      <view class='discount_coupon spline-bottom cont'>
+        <text>优惠券</text>
+        <text class='no-coupons theme-font-gray'>暂无可用优惠券<text decode>&gt;</text></text>
+      </view>
+      <view class='integral_coupon cont'>
+        <text>积分券</text>
+        <text class='no-coupons theme-font-gray'>暂无可用积分券<text decode>&gt;</text></text>
+      </view>
+    </view>
+
+    <!-- 商品明细 -->
+    <view class='wrap white-bg details pro-details'>
+      <view class='wrap-head theme-font-gray'>商品明细</view>
+			<view wx:for="{{pros}}" wx:key="{{index}}" class='cont spline-top flex_row'>
+				<text class='name no_wrap'>{{item.product_name}}</text>
+				<text class='flr num'>x{{item.num}}</text>
+				<text class='flr price'>￥{{item.product_price}}</text>
+			</view>
+    </view>
+
+    <!-- 费用明细 -->
+    <view class='wrap white-bg details'>
+      <view class='wrap-head theme-font-gray spline-bottom'>费用明细</view>
+      <view class='cont fee'>
+        <text>商品总额</text>
+        <text>￥{{product_amount}}</text>
+      </view>
+      <view class='cont fee'>
+        <text>配送费</text>
+        <text>￥{{dilivery_amount}}</text>
+      </view>
+      <view class='cont fee'>
+        <text>服务费</text>
+        <text>￥{{server_amount}}</text>
+      </view>
+			<view class='cont fee'>
+        <text>配送费减免</text>
+        <text>￥{{dilivery_amount_reduct}}</text>
+      </view>
+      <view class='cont fee'>
+        <text>优惠券</text>
+        <text>￥{{coupon_amount}}</text>
+      </view>
+    </view>
+
+    <!-- 下单 -->
+    <view class='place-order white-bg flex_row'>
+      <view>
+        <text>应付金额: </text>
+        <text class='red_font'>￥{{total_amount}}</text>
+      </view>
+      <view class='theme-bg' bindtap='toPay'>确认下单</view>
+    </view>
+  </view>
+</view>
