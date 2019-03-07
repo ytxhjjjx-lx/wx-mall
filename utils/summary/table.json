@@ -75,6 +75,13 @@
 		"price": "商品的价格"
 	},
 	"订单列表": {
-		
+		"place_order_time": "下单时间",
+		"order_state": "订单状态",
+		"remark": "收货备注",
+		"id": "订单在订单表中的编号",
+		"orderNo": "订单编号",
+		"userinfo": "收货人信息",
+		"products": "订单的商品列表",
+		"userId": "用户id, 订单所属的用户"
 	}
 }
