@@ -33,8 +33,8 @@
 <view class='container' hidden='{{carts.length == 0}}'>
   <header-gray headerTitle="购物车"></header-gray>
   <view class='main_content'>
-    <!--地址信息  -->
-    <view class='table receive'>
+    <!--有地址信息  -->
+    <view class='table receive' hidden='{{!has_site}}'>
       <navigator class='more' url="/packageA/pages/site/site">
         修改
         <text decode='true'>&gt;</text>
@@ -69,6 +69,8 @@
         </view>
       </view>
     </view>
+		<!-- 无地址信息 -->
+		<view bindtap='toSite' hidden='{{has_site}}' class='no_site red_font'>暂未选择收货地址，前往添加地址 >></view>
     <!-- 购物车信息 -->
     <view class='cart-groups-wraper'>
       <view class="cart-group">
@@ -92,7 +94,7 @@
         <view class="group-comment">
           <text class="group-comment-txt">收货备注<text decode='true'>&nbsp;&nbsp;</text></text>
           <view class="group-comment-input-wrap">
-            <input type="text" placeholder="可输入100字以内特殊要求内容" maxlength="100" class="group-comment-input" bindfocus="focusInput" bindblur="blurInput" />
+            <input type="text" placeholder="可输入100字以内特殊要求内容" maxlength="100" class="group-comment-input" bindfocus="focusInput"  bindinput="bindinput"/>
           </view>
         </view>
         <!-- 商品列表 -->

@@ -24,6 +24,8 @@
         </view>
       </view>
     </view>
+		<view class='no_favorites' hidden='{{favorPros.length > 0}}'
+		bindtap="toIndex">暂无收藏商品，前往收藏 >></view>
   </view>
   <!-- 底部 -->
   <view class="footer white-bg" hidden='{{!editBol}}'>

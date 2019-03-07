@@ -35,7 +35,7 @@
 				<text>收<text class='text-hidden'>a</text>货<text class='text-hidden'>a</text>人 :</text>
 				<text>{{userinfo.selectSite.linkman}}</text>
 				<text class='text-hidden'>aa</text>
-				<text>{{userinfo.phone}}</text>
+				<text>{{userinfo.selectSite.phone}}</text>
 			</view>
 			<view class='flex_row'>
 				<text>收货地址 :</text>
@@ -78,7 +78,6 @@
 		</view>
 		<!-- 支付 -->
     <view class='place-order white-bg'>
-      <view class='theme-bg flr' bindtap='toMyOrder'>我的订单</view>
       <view class='theme-bg flr' bindtap='cancelOrder'>取消订单</view>
 			<view class='theme-bg flr' bindtap='toPay'>去支付</view>
     </view>

@@ -1,5 +1,6 @@
 // packageA/pages/payOrder/pay-order.js
 const app = getApp()
+let api = require('../../../utils/api.js')
 
 Page({
 
@@ -17,7 +18,9 @@ Page({
 		dilivery_amount: 0,
 		dilivery_amount_reduct: 0,
 		total_amount: 0,
-		order_state: false
+		order_state: false,
+		//订单在数据表中的编号
+		order_id: 0
 	},
 
 	/**
@@ -39,6 +42,9 @@ Page({
 	 */
 	onShow: function () {
 		let carts = app.globalData.carts
+		carts = carts.filter(cart => {
+			return cart.checked
+		})
 		let userinfo = app.globalData.userinfo
 		this.setData({
 			pros: carts,
@@ -47,7 +53,8 @@ Page({
 			place_order_time: wx.getStorageSync("place_order_time"),
 			pay_way: wx.getStorageSync("pay_way"),
 			dilivery_time: JSON.parse(wx.getStorageSync("dilivery_time")),
-			userinfo: userinfo
+			userinfo: userinfo,
+			order_id: wx.getStorageSync("order_id")
 		})
 		let fee_detail = wx.getStorageSync('fee_detail')	
 		this.setData({
@@ -85,19 +92,41 @@ Page({
 
 	},
 
+	//支付
 	toPay () {
 		this.setData({
 			order_state: true
 		})
-		wx.showToast({
-			title: '支付成功!',
-			mask: true,
-			duration: 800
+		let order_id = this.data.order_id
+		let url = api.host + '/orders/' + order_id
+		app.fetch(url).then(res => {
+			return new Promise((resolve, reject) => {
+				resolve(res)
+			})
+		}).then(res => {
+			app.fetch(url ,'put', {
+				place_order_time: res.place_order_time,
+				order_state: !res.order_state,
+				remark: res.remark,
+				userId: res.userId,
+				products: res.products,
+				orderNo: res.orderNo,
+				userinfo: res.userinfo
+			}).then(res => {
+				if (res.id) {
+					wx.showToast({
+						title: '支付成功!',
+						mask: true,
+						duration: 800
+					})
+					setTimeout(() => {
+						wx.redirectTo({
+							url: '/packageB/pages/my-orders/my-orders',
+						})
+					}, 800)
+				}
+			})
 		})
-	},
-
-	toMyOrder () {
-
 	},
 
 	cancelOrder () {

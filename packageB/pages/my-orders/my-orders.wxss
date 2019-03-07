@@ -1,1 +1,55 @@
 /* packageB/pages/my-orders/my-orders.wxss */
+.main_content {
+	font-size: 30rpx;
+}
+
+.order {
+  margin: 30rpx 0;
+  padding: 25rpx;
+  color: #333;
+}
+
+.no_orders {
+	margin-top: 100rpx;
+	text-align: center;
+}
+
+.receive-info {
+  height: 60rpx;
+  line-height: 60rpx;
+  font-weight: bold;
+}
+
+.pro-info {
+  border: 1px solid #efefef;
+  padding: 10rpx;
+}
+
+.pro-info image {
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.pro-info view {
+  flex: 1;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.order .info {
+  height: 60rpx;
+  line-height: 60rpx;
+}
+
+.info>text:first-child {
+  width: 25%;
+}
+
+.info>text:last-child {
+  flex: 1;
+}
+
+.info-state {
+	height: 50rpx;
+	line-height: 50rpx;
+}

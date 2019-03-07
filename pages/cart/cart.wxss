@@ -308,3 +308,10 @@
 .group-footer .group-btn1 {
 	background-color: #aaa;
 }
+
+.no_site {
+	height: 100rpx;
+	line-height: 100rpx;
+	font-size: 30rpx;
+	text-align: center;
+}

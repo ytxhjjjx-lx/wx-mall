@@ -133,5 +133,11 @@ Page({
 				}
 			})
 		}
+	},
+
+	toIndex () {
+		wx.switchTab({
+			url: '/index',
+		})
 	}
 })

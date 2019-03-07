@@ -58,11 +58,15 @@ page::-webkit-scrollbar, view::-webkit-scrollbar{
 }
 
 .red_font {
-	color: #e64f1a;
+	color: #dc3528;
 }
 
 .green_font {
 	color: green;
+}
+
+.blue_font {
+	color: #00f;
 }
 
 .theme-font-gray{
@@ -77,10 +81,10 @@ page::-webkit-scrollbar, view::-webkit-scrollbar{
 }
 
 .spline-top{
-  border-top: 1px solid #e0e0e0;
+  border-top: 1px solid #efefef;
 }
 .spline-bottom{
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #efefef;
 }
 
 .theme-btn{
@@ -118,4 +122,8 @@ page::-webkit-scrollbar, view::-webkit-scrollbar{
 
 .flr {
 	float: right;
+}
+
+.fll {
+	float: left;
 }

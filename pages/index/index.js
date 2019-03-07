@@ -13,7 +13,7 @@ Page({
   //事件处理函数
   bindViewTap: function() {},
   onLoad: function() {
-		wx.redirectTo({
+		wx.switchTab({
 			url: '/pages/cart/cart',
 		})
     //提取商品数据（已登录拿到同步后的数据）

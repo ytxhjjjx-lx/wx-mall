@@ -85,3 +85,9 @@
   right: 20rpx;
   top: 14rpx;
 }
+
+.no_favorites {
+	margin-top: 100rpx;
+	text-align: center;
+	font-size: 30rpx;
+}

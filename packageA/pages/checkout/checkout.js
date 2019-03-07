@@ -1,6 +1,7 @@
 // packageA/pages/checkout/checkout.js
 const app = getApp()
 let util = require('../../../utils/util.js')
+let api = require('../../../utils/api.js')
 
 Page({
 
@@ -52,6 +53,10 @@ Page({
   onShow: function() {
     let carts = app.globalData.carts
     let pros = Object.assign([], carts)
+		//过滤
+		pros = pros.filter(pro => {
+			return pro.checked
+		})
     this.setData({
       pros: pros
     })
@@ -109,28 +114,31 @@ Page({
   },
 
   toPay() {
+		//生成订单编号，收货码
 		let codes = util.getCode()
-		//存储下单时间,收货码,订单编号
-		wx.setStorageSync('place_order_time', util.formatTime(new Date()))
-		wx.setStorageSync('dilivery_code', codes[0])
-		wx.setStorageSync('order_no', codes[1])
-		//存储费用信息（总额，配送费，配送费减免）
-		let fee_detail = {
-			dilivery_amount: this.data.dilivery_amount,
-			dilivery_amount_reduct: this.data.dilivery_amount_reduct,
-			total_amount : this.data.total_amount
+		let remark = wx.getStorageSync('remark')
+		//创建订单
+		let orderObj = {
+			userId: app.globalData.userinfo.id,
+			products: this.data.pros,
+			orderNo: codes[1],
+			userinfo: app.globalData.userinfo,
+			//下单时间
+			place_order_time: util.formatTime(new Date()),
+			//订单状态
+			order_state: false,
+			remark: remark
 		}
-		wx.setStorageSync('fee_detail', JSON.stringify(fee_detail))
-    wx.showLoading({
-      title: '提交订单中...',
-      mask: true
-    })
-    setTimeout(function() {
-      wx.hideLoading()
-      wx.redirectTo({
-        url: '/packageA/pages/pay-order/pay-order',
-      })
-    }, 800)
+		let url = api.host + '/orders'
+		app.fetch(url, 'post', orderObj).then(res => {
+			if (res.id) {
+				// console.log(res)
+				app.globalData.orders.push(res)
+				//存储订单相关信息到本地
+				wx.setStorageSync('order_id', res.id)
+				this.setInfoStorage(codes) 
+			}
+		})	
   },
 
   initPayAcount() {
@@ -138,13 +146,15 @@ Page({
     let dilivery_time = this.data.dilivery_time
     let price = 0
     for (let pro of pros) {
-      price += Number(pro.product_price * pro.num)
+			if(pro.checked) {
+				price += Number(pro.product_price * pro.num)
+			}
     }
     price = price.toFixed(1)
     this.setData({
       product_amount: price
     })
-    if (dilivery_time < 21) {
+    if (dilivery_time < 21 || dilivery_time == 'limit') {
       if (price > 50) {
         this.setData({
           dilivery_amount: 5,
@@ -166,5 +176,30 @@ Page({
     this.setData({
       total_amount: totalPrice.toFixed(1)
     })
-  }
+  },
+
+	setInfoStorage (codes) {
+		//存储下单时间,收货码,订单编号
+		wx.setStorageSync('place_order_time', util.formatTime(new Date()))
+		wx.setStorageSync('dilivery_code', codes[0])
+		wx.setStorageSync('order_no', codes[1])
+		//存储费用信息（总额，配送费，配送费减免）
+		let fee_detail = {
+			dilivery_amount: this.data.dilivery_amount,
+			dilivery_amount_reduct: this.data.dilivery_amount_reduct,
+			total_amount: this.data.total_amount
+		}
+		wx.setStorageSync('fee_detail', JSON.stringify(fee_detail))
+		wx.showLoading({
+			title: '提交订单中...',
+			mask: true
+		})
+		setTimeout(function () {
+			wx.hideLoading()
+			//跳转至支付账单页
+			wx.redirectTo({
+				url: '/packageA/pages/pay-order/pay-order',
+			})
+		}, 800)
+	}
 })

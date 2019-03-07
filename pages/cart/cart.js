@@ -173,7 +173,9 @@ Page({
     linkman: '',
     site: '',
     phone: '',
-    sex: 'male'
+    sex: 'male',
+		//是否选择了地址
+		has_site: false
   },
 
   /**
@@ -195,12 +197,19 @@ Page({
    */
   onShow: function() {
     let userinfo = app.globalData.userinfo
-    this.setData({
-      linkman: userinfo.selectSite.linkman,
-      phone: userinfo.selectSite.phone,
-      site: userinfo.selectSite.site + ' ' + userinfo.selectSite.detailSite,
-      sex: userinfo.selectSite.sex
-    })
+		if (userinfo.selectSite.id) {
+			this.setData({
+				linkman: userinfo.selectSite.linkman,
+				phone: userinfo.selectSite.phone,
+				site: userinfo.selectSite.site + ' ' + userinfo.selectSite.detailSite,
+				sex: userinfo.selectSite.sex,
+				has_site: true
+			})
+		} else {
+			this.setData({
+				has_site: false
+			})
+		}
     this.checkLoginState()
   },
 
@@ -256,13 +265,17 @@ Page({
       showSelect: !bol
     })
   },
+
   focusInput(event) {
     event.detail.height = 90;
   },
-  blurInput(event) {
+
+	bindinput(event) {
+		let val = event.detail.value
     this.setData({
       receive_remark: event.detail.value
     })
+		wx.setStorageSync('remark', val)
   },
 
   //切换勾选状态
@@ -389,18 +402,24 @@ Page({
 					})
         },
 				fail: function(res){
-					wx.setStorage({
-						key: 'dilivery_time',
-						data: JSON.stringify({
-							title: '30分钟送达',
-							time: 'limit'
-						}),
-					})
+					wx.setStorageSync('dilivery_time', JSON.stringify({
+						title: '30分钟送达',
+						time: 'limit'
+					})),
 					_this.setData({
 						receive_time: '30分钟送达'
 					})
+				},
+				complete: function() {
+					wx.setStorageSync('remark', '')
 				}
       })
     }
-  }
+  },
+
+	toSite () {
+		wx.redirectTo({
+			url: '/packageA/pages/site/site',
+		})
+	}
 })

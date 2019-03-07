@@ -9,10 +9,11 @@ App({
       // 提取该用户的购物车，收藏夹，收货地址等信息
       userinfo = JSON.parse(userinfo)
       this.globalData.userinfo = userinfo
-      // 此处提取数据可能无法同步到首页展示（网络延迟）
+      // 此处提取购物车数据可能无法同步到首页展示（网络延迟）
       // this.getCarts(userinfo.id)
       this.getAddresses(userinfo.id)
       this.getFavorites(userinfo.id)
+			this.getOrders(userinfo.id)
     }
   },
   onShow: function() {
@@ -28,6 +29,8 @@ App({
     addresses: [],
     // 收藏夹数据
     favorites: [],
+		//订单
+		orders: [],
 		//用户所选收货地址
 		selectedSite: {},
 		//所选城市对象
@@ -86,9 +89,10 @@ App({
 								cb(categories)
 							}
 						}) 
-						// 提取该用户收藏夹，收货地址等信息
+						// 提取该用户收藏夹，收货地址,订单等信息
 						this.getAddresses(userInfo.id)
 						this.getFavorites(userInfo.id)
+						this.getOrders(userInfo.id)
 					} else {
 						//未登录，显示归类后的未同步的数据（仅供查看）
 						this.globalData.computedCategories = categories
@@ -274,6 +278,14 @@ App({
       this.globalData.favorites = res
     })
   },
+
+	//获取用户订单信息
+	getOrders(id) {
+		let url = `${api.host}/orders?userId=${id}`
+		this.fetch(url).then(res => {
+			this.globalData.orders = res
+		})
+	},
 
   /* 
    * 封装的请求方法

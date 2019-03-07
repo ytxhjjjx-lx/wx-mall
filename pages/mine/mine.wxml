@@ -19,11 +19,12 @@
   <view class="mine-content">
     <view class="mine-order">
       <view class="more">
-				<text>我的订单</text>
-        <text class="more_order">
+				<navigator url='/packageB/pages/my-orders/my-orders'>
+					<text>我的订单</text>
+					<text class="more_order">
           查看全部订单
         </text>
-        
+        </navigator>
       </view>
       <view class="order-types">
         <view class="order-type order-type-11">代付款</view>

@@ -53,12 +53,14 @@ Page({
   },
 
 	logout() {
-		wx.removeStorage({
-			key: 'userinfo',
-			success(res) {
-				wx.redirectTo({
-					url: '/pages/login/login'
-				})
+		//清空本地缓存
+		wx.clearStorage({
+			success: function (res) {
+				if (res.errMsg == 'clearStorage:ok'){
+					wx.redirectTo({
+						url: '/pages/login/login'
+					})
+				}
 			}
 		})
 	},

@@ -1,2 +1,62 @@
 <!--packageB/pages/my-orders/my-orders.wxml-->
-<text>packageB/pages/my-orders/my-orders.wxml</text>
+<wxs module="order_module">
+  var total = function(arr) {
+    var result = 0
+		var count = 0
+    var arr = arr
+    for (var i = 0; i < arr.length; i++) {
+      result += Number(arr[i].num * arr[i].product_price)
+			count++
+    }
+    return [result.toFixed(1), count]
+  }
+
+  module.exports = {
+    total: total
+  }
+</wxs>
+
+<view class='container'>
+  <header-gray headerTitle="我的订单"></header-gray>
+  <view class='main_content'>
+    <view wx:for="{{orders}}" wx:key="{{index}}" class='order white-bg'>
+      <view class='info flex_row'>
+        <text>订单编号：</text>
+        <text class='no_wrap'>{{item.orderNo}}</text>
+      </view>
+      <view class='info flex_row'>
+        <text>下单时间：</text>
+        <text class='no_wrap'>{{item.place_order_time}}</text>
+      </view>
+      <view class='pro-info flex_row'>
+        <image src='{{item.products[0].product_img}}'></image>
+        <view class='flex_column' style='font-weight: 500;'>
+          <text>一共{{order_module.total(item.products)[1]}}件商品</text>
+          <text>总价:￥{{order_module.total(item.products)[0]}}</text>
+        </view>
+      </view>
+      <!-- 收货信息 -->
+      <view class='receive-info spline-bottom'>收货信息：</view>
+      <view class='info flex_row'>
+        <text>收货人：</text>
+        <text class='no_wrap'>
+					<text>{{item.userinfo.selectSite.linkman}}</text>
+					<text class='text-hidden'>中</text>
+					<text>{{item.userinfo.selectSite.phone}}</text>
+					<text class='text-hidden'>中</text>
+					<text>{{item.userinfo.selectSite.detailSite}}</text>
+        </text>
+      </view>
+      <view class='info flex_row'>
+        <text>备注信息：</text>
+        <text class='no_wrap'>{{item.remark}}</text>
+      </view>
+      <view class='info-state'>
+        <text class='{{item.order_state ? "blue_font flr" : "red_font flr"}}'>{{item.order_state ? '已支付' : '待支付'}}</text>
+				<text class='flr'>订单状态：</text>
+      </view>
+    </view>
+		<view class='no_orders' hidden='{{orders.length > 0}}'
+		 bindtap="toCart">暂无订单，前往创建订单 >></view>
+  </view>
+</view>
