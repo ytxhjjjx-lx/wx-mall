@@ -20,9 +20,13 @@ npm run build --report
 
 ## Run project
 
-项目服务端数据位于/database库中<br>
+1.项目服务端数据位于/database库中<br>
 npm run db  启动json-server服务器(这里提供了一些测试用数据)<br>
 可在微信web开发者工具中查看效果, 开发工具选择不校验安全域名
+
+2.小程序分包<br>
+对小程序进行分包，可以优化小程序首次启动的下载时间，以及在团队开发时更好协作<br>
+*[参考文档](https://developers.weixin.qq.com/miniprogram/dev/framework/subpackages.html)
 
 ## Friendly Link
 
