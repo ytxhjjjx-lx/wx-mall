@@ -154,7 +154,7 @@ Page({
         //设置城市名，限制关键词所示的地域范围
         region: selectCity,
         success: function(res) {
-					console.log(res.data)
+					// console.log(res.data)
           resolve(res)
         },
         fail: function(res) {

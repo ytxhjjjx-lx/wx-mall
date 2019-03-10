@@ -13,9 +13,6 @@ Page({
   //事件处理函数
   bindViewTap: function() {},
   onLoad: function() {
-		wx.switchTab({
-			url: '/pages/cart/cart',
-		})
     //提取商品数据（已登录拿到同步后的数据）
     let computedCategories = app.globalData.computedCategories
     if (computedCategories.length > 0) {
@@ -49,6 +46,9 @@ Page({
     })
   },
 
+	onReachBottom() {
+		console.log('触底啦')
+	},
 
   addCart(e) {
     let pro = e.currentTarget.dataset.pro

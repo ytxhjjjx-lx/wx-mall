@@ -80,6 +80,7 @@
     <view class='place-order white-bg'>
       <view class='theme-bg flr' bindtap='cancelOrder'>取消订单</view>
 			<view class='theme-bg flr' bindtap='toPay'>去支付</view>
+			<view class='theme-bg flr' bindtap='toMyOrder'>我的订单</view>
     </view>
 	</view>
 </view>

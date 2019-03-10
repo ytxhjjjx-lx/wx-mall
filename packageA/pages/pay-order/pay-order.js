@@ -98,15 +98,24 @@ Page({
 			order_state: true
 		})
 		let order_id = this.data.order_id
+		let orders = app.globalData.orders
 		let url = api.host + '/orders/' + order_id
 		app.fetch(url).then(res => {
 			return new Promise((resolve, reject) => {
 				resolve(res)
 			})
 		}).then(res => {
+			//修改订单状态(全局)
+			for (let order of orders) {
+				if (order.id == res.id) {
+					order.order_state = true
+				}
+			}
+			app.globalData.orders = orders
+			//修改订单状态(数据表)
 			app.fetch(url ,'put', {
 				place_order_time: res.place_order_time,
-				order_state: !res.order_state,
+				order_state: true,
 				remark: res.remark,
 				userId: res.userId,
 				products: res.products,
@@ -141,6 +150,12 @@ Page({
 					})
 				} else if (res.cancel) {}
 			}
+		})
+	},
+
+	toMyOrder () {
+		wx.redirectTo({
+			url: '/packageB/pages/my-orders/my-orders',
 		})
 	}
 })

@@ -36,7 +36,9 @@ App({
 		//所选城市对象
 		selectedCity: {},
 		// 是否从select-site页面进入add-site页
-		selectSiteBol: false
+		selectSiteBol: false,
+		//购物车商品数量(用于购物车tab图标显示)
+		cart_count: 0
   },
 
   /* 
@@ -144,8 +146,7 @@ App({
               product_price: carts[i].product_price,
               checked: carts[i].checked,
               num: carts[i].num
-            })
-            .then(res => {
+            }).then(res => {
               if (res.id > 0) {
                 // 更新成功
                 wx.showToast({
@@ -154,6 +155,7 @@ App({
                   duration: 800,
                   mask: true,
                 })
+								this.refreshCart(carts)
                 this.resetProductNum(res)
                   .then(resetedProducts => {
                     resolve(resetedProducts)
@@ -184,6 +186,7 @@ App({
               duration: 800,
               mask: true,
             })
+						this.refreshCart(carts)
             this.resetProductNum(res)
               .then(resetedProducts => {
                 resolve(resetedProducts)
@@ -225,6 +228,7 @@ App({
                   duration: 800,
                   mask: true
                 })
+								this.refreshCart(carts)
                 this.resetProductNum(res).then(res => {
                   resolve()
                 })
@@ -240,11 +244,12 @@ App({
                   mask: true
                 })
                 cartObj.num--
-                  this.resetProductNum(cartObj).then(res => {
-                    // 从购物车列表中移除
-                    carts.splice(index, 1)
-                    resolve()
-                  })
+								this.resetProductNum(cartObj).then(res => {
+									// 从购物车列表中移除
+									carts.splice(index, 1)
+									this.refreshCart(carts)
+									resolve()
+								})
               })
           }
         }
@@ -257,7 +262,7 @@ App({
     let url = `${api.host}/carts?userId=${id}`
     return new Promise((resolve, reject) => {
       this.fetch(url).then(res => {
-        this.globalData.carts = res
+				this.refreshCart(res)
         resolve(res)
       })
     })
@@ -285,6 +290,29 @@ App({
 		this.fetch(url).then(res => {
 			this.globalData.orders = res
 		})
+	},
+
+	//更新全局购物车数量
+	refreshCart (carts) {
+		this.globalData.carts = carts
+		let num = 0
+		for (let pro of carts) {
+			if (pro.checked) {
+				num += pro.num
+			}
+		}
+		this.globalData.cart_count = num
+		//更新tabbar数量图标
+		if (num <= 0) {
+			wx.removeTabBarBadge({
+				index: 2
+			})
+		} else {
+			wx.setTabBarBadge({
+				index: 2,
+				text: String(num),
+			})
+		}
 	},
 
   /* 

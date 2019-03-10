@@ -132,7 +132,6 @@ Page({
 		let url = api.host + '/orders'
 		app.fetch(url, 'post', orderObj).then(res => {
 			if (res.id) {
-				// console.log(res)
 				app.globalData.orders.push(res)
 				//存储订单相关信息到本地
 				wx.setStorageSync('order_id', res.id)

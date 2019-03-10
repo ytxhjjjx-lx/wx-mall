@@ -307,6 +307,7 @@ Page({
       carts: carts,
       checkedAll: checkAllBol
     })
+		app.refreshCart(carts)
   },
 
   subProduct(e) {
@@ -352,6 +353,7 @@ Page({
       checkedAll: bol,
       carts: carts
     })
+		app.refreshCart(carts)
   },
 
   //判断登录状态

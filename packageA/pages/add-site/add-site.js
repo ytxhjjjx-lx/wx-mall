@@ -45,7 +45,6 @@ Page({
   onLoad: function(options) {
     let id = options.siteId
     let userinfo = app.globalData.userinfo
-		console.log(app.globalData.addresses)
     this.setData({
       userinfo: userinfo,
       sites: app.globalData.addresses
@@ -269,6 +268,11 @@ Page({
             duration: 800,
             mask: true,
           })
+					setTimeout(() => {
+						wx.redirectTo({
+							url: '/packageA/pages/site/site',
+						})
+					}, 800)
         }
       })
     }
