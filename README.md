@@ -42,11 +42,8 @@ json-server服务器
 
 项目中的地点检索功能使用了腾讯位置服务(https://lbs.qq.com/)中的微信小程序JavaScript SDK
 
-使用步骤(具体使用详情见https://lbs.qq.com/qqmap_wx_jssdk/index.html)：
-1.申请开发者密钥（key）：https://lbs.qq.com/console/key.html
-我的key: XH7BZ-NHS3D-NUS43-HSIMH-26SMO-YLBUE
-2.下载微信小程序JavaScriptSDK*[下载地址](http://3gimg.qq.com/lightmap/xcx/jssdk/qqmap-wx-jssdk1.0.zip)
-3.安全域名设置
+使用步骤(具体使用详情见https://lbs.qq.com/qqmap_wx_jssdk/index.html)：<br>1.申请开发者密钥（key）：https://lbs.qq.com/console/key.html
+我的key: XH7BZ-NHS3D-NUS43-HSIMH-26SMO-YLBUE<br>2.下载微信小程序JavaScriptSDK*[下载地址](http://3gimg.qq.com/lightmap/xcx/jssdk/qqmap-wx-jssdk1.0.zip)<br>3.安全域名设置
 
 
 ## Api
@@ -95,5 +92,4 @@ json-server服务器
     <br>
     <img src="./snapshots/order-list.gif" >
     </br>
-	 <strong><a href="https://jeneser.github.io/douban/">Live Demo</a></strong>
 </p>
