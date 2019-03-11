@@ -96,12 +96,11 @@ json-server服务器
     <img src="./snapshots/checkout.png" >
     <img src="./snapshots/order-detail.png" >
     <br>
-    <br>
     <img src="./snapshots/order-list.gif" >
     <img src="./snapshots/select-site.gif" >
-    </br>
     <br>
     <img src="./snapshots/favorites.gif" >
     <img src="./snapshots/product-detail.gif" >
-    </br>
+    <br>
+    <img src="./snapshots/search-site.gif" >
 </p>
