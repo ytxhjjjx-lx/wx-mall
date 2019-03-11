@@ -105,12 +105,11 @@ json-server服务器
     <img src="./snapshots/search-site.gif" >
   <br>
   <br>
-    <img src="./snapshots/order-list.png" >
-    <img src="./snapshots/site-list.png" >
-    <br>
-  <br>
   <img src="./snapshots/checkout.png" >
     <img src="./snapshots/order-detail.png" >
     <br>
-  
+  <br>
+    <img src="./snapshots/order-list.png" >
+    <img src="./snapshots/site-list.png" >
+    <br>
 </p>
