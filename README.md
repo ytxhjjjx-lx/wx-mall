@@ -89,26 +89,38 @@ json-server服务器
     <img src="./snapshots/category.gif" >
     <br>
     <br>
+  <br>
+    <br>
     <img src="./snapshots/mine-page.png" >
     <img src="./snapshots/mine-page2.png" >
     <br>
   <br>
+  <br>
+    <br>
     <img src="./snapshots/select-site.png" >
     <img src="./snapshots/select-site2.png" >
     <br>
   <br>
+  <br>
+    <br>
     <img src="./snapshots/favorites.gif" >
     <img src="./snapshots/product-detail.gif" >
     <br>
   <br>
+  <br>
+    <br>
   <img src="./snapshots/edit-site.png" >
     <img src="./snapshots/search-site.gif" >
   <br>
   <br>
+  <br>
+    <br>
   <img src="./snapshots/checkout.png" >
     <img src="./snapshots/order-detail.png" >
     <br>
   <br>
+  <br>
+    <br>
     <img src="./snapshots/order-list.png" >
     <img src="./snapshots/site-list.png" >
     <br>
