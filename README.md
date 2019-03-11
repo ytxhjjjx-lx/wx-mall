@@ -84,23 +84,30 @@ json-server服务器
 ## 项目效果图
 
 <p align="center">
+    <br>
     <img src="./snapshots/home.gif" >
     <img src="./snapshots/category.gif" >
+    <br>
     <br>
     <img src="./snapshots/mine-page.png" >
     <img src="./snapshots/mine-page2.png" >
     <br>
+  <br>
     <img src="./snapshots/select-site.png" >
     <img src="./snapshots/select-site2.png" >
     <br>
+  <br>
     <img src="./snapshots/checkout.png" >
     <img src="./snapshots/order-detail.png" >
     <br>
+  <br>
     <img src="./snapshots/order-list.gif" >
     <img src="./snapshots/select-site.gif" >
     <br>
+  <br>
     <img src="./snapshots/favorites.gif" >
     <img src="./snapshots/product-detail.gif" >
     <br>
+  <br>
     <img src="./snapshots/search-site.gif" >
 </p>
