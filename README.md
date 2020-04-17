@@ -85,14 +85,14 @@ json-server服务器
 
 <p align="center">
     <br>
-    <img src="/snapshots/home.gif" >
+    <img src="/snapshots/home.gif" width="375">
     <img src="/snapshots/category.gif" >
     <br>
     <br>
   <br>
     <br>
-    <img src="./snapshots/mine-page.png" >
-    <img src="./snapshots/mine-page2.png" >
+    <img src="./snapshots/mine-page.png" width="375">
+    <img src="./snapshots/mine-page2.png" width="375">
     <br>
   <br>
   <br>
