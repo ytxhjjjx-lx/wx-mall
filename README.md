@@ -85,8 +85,8 @@ json-server服务器
 
 <p align="center">
     <br>
-    <img src="./snapshots/home.gif" >
-    <img src="./snapshots/category.gif" >
+    <img src="/snapshots/home.gif" >
+    <img src="/snapshots/category.gif" >
     <br>
     <br>
   <br>
